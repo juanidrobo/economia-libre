@@ -1,0 +1,45 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: economia-libre
+    database_user: ???????
+    database_password: ???????
+    mailer_transport: smtp
+    mailer_host: ???????
+    mailer_user: ???????
+    mailer_password: ???????
+    mailer_name: Economía Libre
+    locale: es
+    secret: Cualquier-cadena-de-texto-que-sea-unica
+    
+    recaptcha_url: https://www.google.com/recaptcha/api/siteverify
+    recaptcha_key: ???????
+    recaptcha_secret: ???????
+    
+    fb_token_exchange_url: https://graph.facebook.com/oauth/access_token
+    fb_client_id: ???????
+    fb_client_secret: ???????
+    fb_me_url: https://graph.facebook.com/me?fields=id,name,email
+    fb_graph_url : https://graph.facebook.com/
+    fb_client_version: v2.8
+    fb_client_page: https://www.facebook.com/Economía-Libre-1907978019418967/
+    
+    fb_account_kit_id: ???????
+    fb_account_kit_secret: ???????
+    fb_account_kit_token_exchange_url: https://graph.accountkit.com/v1.1/access_token
+    fb_account_kit_me_url: https://graph.accountkit.com/v1.1/me
+    fb_account_kit_version: v1.1
+
+    g_client_id: ???????
+    g_api_key: ???????
+    g_me_url: https://people.googleapis.com/v1/people/me
+    g_revoke_url: https://accounts.google.com/o/oauth2/revoke
+    
+    tw_token_request_url: https://api.twitter.com/oauth/request_token
+    tw_api_key: ???????
+    tw_secret_key: ???????
+    tw_authenticate_url: https://api.twitter.com/oauth/authenticate
+    
+    
