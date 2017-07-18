@@ -1,0 +1,78 @@
+<div class="card ">
+    <div class="card-header">
+        <label class="card-title">¿Quien eres?</label>
+    </div>
+    <div class="card-block">
+        <div class="login-left">
+            <div class="div-login">
+                <label class="label-email text-primary text-bold"></label>
+
+
+                <div class="div-email">
+                    <label class="text-primary"><b>Correo eléctronico:</b></label>
+                    <div><input class="form-control login-email" type="email" placeholder="nombre@ejemplo.org"></input></div>
+                </div>
+                <div class="div-password"> <label class="control-label text-primary "><b>Contraseña:</b></label>
+                    <p class="form-inline form-group"><input class="form-control login-seckey" type="password" ></input></p>
+                </div>
+
+
+                <div class="div-register">
+                    <label class="text-primary">Registra tu correo. Un correo eléctronico será enviado para continuar.</label>
+                    <button type="button" class="btn btn-primary btn-lg btn-register-back ">atras</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-register ">Registrar</button>
+                </div>
+
+                <div class="div-check-email">
+                    <div><button type="button" class="btn btn-primary btn-lg btn-check ">Continuar</button>
+                    </div>
+                </div>
+                <div class="div-login-password">
+                    <button type="button" class="btn btn-primary btn-lg btn-login-back ">atras</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-login ">Continuar</button>
+                    <div><a href="{{path('recoveryKey')}}">¿Olvidaste tu contraseña?</a></div>
+                </div>
+                <img class="login processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+                <div class="login alert alert-danger"></div>
+                <div class="login alert alert-success lead"></div>
+
+            </div>
+            <div class="network">
+                <div style="display: block;"><label class="text-primary"><b>Ingresar con redes sociales:</b></label></div>
+
+                <div class="fblogin">
+                    <button class="btn btn-primary btn-lg btn-fb-login">Facebook</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                <div class="twlogin">
+                    <button class="btn btn-primary btn-lg btn-tw-login">Twitter</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                <div class="glogin">
+                    <button class="btn btn-primary btn-lg btn-g-login" disabled="true">Google</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                 <img id="login-processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+           
+            </div>
+        </div>
+
+
+        <div class="accountfbKit">
+            <div><label class="text-primary "><b>Ingresar sin contraseña:</b></label></div>
+            <input id="csrf" type="hidden" value="{{csrf}}" />
+            <input value="+57" maxlength="5" style="width: 70px !important" id="country_code" />
+            <input class="form-control" placeholder="numero de celular" id="phone_number"/>
+            <button class="btn btn-primary btn-lg" onclick="smsLogin();">Login via SMS</button>
+            </br>
+            </br>
+            <input  class="form-control" placeholder="email" id="email"/>
+            <button class="btn btn-primary btn-lg" onclick="emailLogin();">Login via Email</button>
+        </div>
+
+
+    </div>
+</div>
+
+
+

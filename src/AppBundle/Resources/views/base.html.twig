@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        {{ include ('AppBundle:index:title.html.twig') }}
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/font-awesome/css/font-awesome.min.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/bootstrap/css/bootstrap.min.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/base.css') }}" >
+        {% if not userSession %}
+
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/index/login.css') }}" >
+
+        {%endif%}
+
+        {% block css %}
+
+        {%endblock%}
+        {% block jsHead %}
+
+        {%endblock%}
+
+
+    </head>
+
+    <body class="container" >
+
+        {{ include ('AppBundle:index:menu.html.twig') }}
+        <main style="display: inline-block">
+            {% block body %}
+            {%endblock%}
+            <!-- jQuery -->
+            <script src="{{ asset('bundles/appbundle/bootstrap/js/jquery.js')}}"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{{ asset('bundles/appbundle/tether/js/tether.min.js')}}"></script>
+            <script src="{{ asset('bundles/appbundle/bootstrap/js/bootstrap.min.js')}}"></script>
+            <script src="{{ asset('bundles/appbundle/bootstrap/js/jquery.redirect.js')}}"></script>
+
+
+            <script>
+
+            </script>
+
+            {%if not userSession  %}
+                <script src="https://sdk.accountkit.com/es_LA/sdk.js" async="true"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/google/google.api.js')}}"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/login.js')}}"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/fblogin.js')}}"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/glogin.js')}}"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/twlogin.js')}}"></script>
+                <script src="{{ asset('bundles/appbundle/js/login/accountFbKit.js')}}"></script>
+
+                <script>
+
+                var homeUrl = "{{path('home')}}";
+                var myHistoryUrl = "{{ path('myHistory') }}";
+                var userLoginUrl = "{{path('login')}}";
+                var userLogoutUrl = "{{path('logout')}}";
+                var validateUserUrl = "{{path('validateUser')}}";
+                var registerUserUrl = "{{path('register')}}";
+                var fbLoginUrl = "{{path('fbLogin')}}";
+                var gLoginUrl = "{{path('gLogin')}}";
+                var twLoginUrl = "{{path('twLogin')}}";
+                var accountFbKitLoginUrl = "{{path('accountFbKitLogin')}}";
+
+                var fb_client_id = "{{fb_client_id}}";
+                var fb_client_version = "{{fb_client_version}}";
+                var fb_account_kit_version = "{{fb_account_kit_version}}";
+
+                var g_client_id = "{{g_client_id}}";
+                var g_api_key = "{{g_api_key}}";
+
+
+                </script>
+            {%endif %}
+
+
+            {%block afterCommonJs %}
+            {%endblock%}
+
+            {% block js %}
+
+
+
+            {%endblock%}
+
+        </main>
+
+        {{ include ('AppBundle:index:footer.html.twig') }}
+    </body>
+</html>
+

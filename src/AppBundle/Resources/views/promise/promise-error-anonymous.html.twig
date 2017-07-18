@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+
+        {{ include ('AppBundle:index:title.html.twig') }}
+
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/bootstrap/css/bootstrap.min.css') }}" >
+        
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/promise.css') }}" >
+
+
+    </head>
+
+    <body class="container" style="">
+
+
+        {{ include ('AppBundle:index:menu.html.twig') }}
+
+        <h3 class="alert alert-warning">Esta moneda fue recogida de manera anónima. La dirección de esta es solamente conocida por el actual dueño. </h3>
+
+        <div class="panel panel-success" >
+            <div class = "panel-heading">
+                <h3>Moneda / Instrumento de intercambio libre</h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <label>Descripción: </label><textarea readonly class="form-control "  rows="7" >{{promise.description}}</textarea>
+                </div>
+                </br>
+                <div id="responsible">
+                    <label>Responsable: </label><div class="">{{promise.responsible.email}}</div>
+                    <a href="{{path('profile')}}?email={{promise.responsible.email}}" target="_blank">
+                        <div> <b>==> Ver perfil público</b> </div>
+                    </a>
+                </div>
+
+
+                {% set qrcode=promise.code %}
+                <img id="qrcode" style="width: 102px" src="{{path('qrcode',{'code':qrcode})}}"></img> 
+
+            </div>
+        </div>
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/appbundle/bootstrap/js/jquery.js')}}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bundles/appbundle/bootstrap/js/bootstrap.min.js')}}"></script>
+
+
+
+    </body>
+
+    {{ include ('AppBundle:index:footer.html.twig') }}
+
+</html>

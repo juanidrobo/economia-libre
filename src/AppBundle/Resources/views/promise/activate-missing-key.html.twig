@@ -1,0 +1,135 @@
+{% extends "AppBundle::base.html.twig" %}
+{%block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/user/activate-missing-key.css') }}" >
+
+{%endblock%}
+
+
+{%block body %}
+
+    <input type="hidden" id="eventCode" value="{{event.code}}" />
+    <input type="hidden" id="userCode" value="{{user.code}}" />
+
+    {% set qrcode=promise.code %}
+ 
+
+    <h3 class="text-primary"><b>Activar Moneda</b> </h3>
+    <div  class="alert alert-info">El usuario <label> {{user.email}} </label> no tiene contraseña!</div>
+    <div class="card ">
+        <div class="card-header">
+            <label>El usuario necesita una sesión. Crea una contraseña o inicia con una red social.</label>
+            <label class="lead">Esto te permitirá liberar, transferir, reclamar, crear y recibir otras monedas.</label>
+        </div>
+        <div class="card-block">
+
+            <div class="old-school-login">
+                <div class = "">
+                    <label class="text-primary" ><b>Contraseña: </b></label>
+                    <div>
+                        <input id="seckey1" class="form-control " type="password" autofocus=""></input>
+                    </div>
+                </div>
+
+                </br>
+                <div class = "">
+                    <label class="text-primary"><b>Reescriba la contraseña:</b> </label>
+                    <div>
+                        <input id="seckey2" class="form-control " type="password"></input>
+                    </div>
+                </div>
+
+                <span class="alert-danger"></span>
+                <div><button type="button" class="btn btn-primary btn-lg login">Continuar</button>
+                    <img id="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}"></div>
+
+            </div>
+
+
+            <div class="social-network-login">
+                <div style="display: block"><label class="text-primary"><b>Ingresar con redes sociales:</b></label></div>
+                <div class="fblogin">
+                    <button class="btn btn-primary btn-lg btn-fb-login">Facebook</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                <div class="twlogin">
+                    <button class="btn btn-primary btn-lg btn-tw-login">Twitter</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                <div class="glogin">
+                    <button class="btn btn-primary btn-lg btn-g-login" disabled="true">Google</button>
+                    <div><span class="alert-danger"></span></div>
+                </div>
+                <img id="login-processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+
+                <div><span class="login alert-danger"></span></div>
+
+            </div>
+
+            <div class="accountfbKit">
+                <div><label class="text-primary "><b>Ingresar sin contraseña:</b></label></div>
+                <input id="csrf" type="hidden" value="{{csrf}}" />
+                <input value="+57" maxlength="5" style="width: 70px !important" id="country_code" />
+                <input class="form-control" placeholder="numero de celular" id="phone_number"/>
+                <button class="btn btn-primary btn-lg" onclick="smsLogin();">Login via SMS</button>
+            </div>  
+
+            </br>
+
+
+        </div>
+        <div class='card-footer'>
+        </div>
+    </div>
+
+
+    <div class="card ">
+        <div  class="card-header">
+            <h3>Moneda respaldada por <b>{{promise.responsible.getDisplayName()}}</b></h3>
+        </div>
+        <div class="card-block">
+            <label>Descripción: </label>
+            <textarea readonly class="form-control" rows="7">{{promise.Description}}</textarea>
+            </br>
+            <div id="div-info">
+                <div id="responsible">
+                    <label>Responsable: </label><div class="">{{promise.responsible.getDisplayName()}}</div>
+                    <a target="_blank" href="{{path('profile')}}?info={{promise.responsible.getOneIdentifier}}" target="_blank">
+                        <div> <b>==> Ver perfil público</b> </div>
+                    </a>
+                </div>
+                </br>
+                <div id="owner">
+
+                    {%if (event.action=="release") %}
+                        {%set owner = event.owner %}
+                    {%elseif (event.action=="anonymousgrab")%}
+                        {% set owner = null %}
+                    {%else%}
+                        {% set owner = event.receiver %}
+                    {%endif%}
+                    <label>Dueño actual: </label><div class="">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
+                    {%if (owner)%}
+                        <a href="{{path('profile')}}?info={{owner.getOneIdentifier}}" target="_blank">
+                            <div> <b>==> Ver perfil público</b> </div>
+                        </a>
+                    {%endif%}
+                </div>
+            </div>
+            <img id="qrcode" style="width: 102px" src="{{path('qrcode',{'code':qrcode})}}"></img> 
+
+        </div>
+    </div>
+{%endblock %}
+
+{%block js %}
+    <script>
+        var createSecKeyUrl = "{{ path('createSecKey') }}";
+        var activatePromiseUrl = window.location.href;
+
+    </script>
+
+    <script src="{{ asset('bundles/appbundle/js/user/activate-missing-key.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+
+
+{%endblock%}

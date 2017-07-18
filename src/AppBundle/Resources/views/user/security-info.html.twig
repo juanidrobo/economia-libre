@@ -1,0 +1,47 @@
+</br>
+<label><b>Contraseña:</b></label>
+{%if  userSession.getSecKey%}
+    <div class="alert alert-success">
+        <label>Ya tienes contraseña! Puedes inciar sesión con cualquiera de los datos verificados (correo o telefono).</label>
+        <label>Para cambiar tu contraseña haz click <a href="{{path('recoveryKey')}}">aqui</a>.</label>
+    </div>
+{%else%}
+
+    <div class="alert alert-danger alert-no-password">
+        <label>No tienes contraseña! Crea una contraseña para inciar sesion con cualquiera de tus datos verificados (correo o telefono)</label>
+    </div>
+
+
+    <div class="old-school-login">
+        <div class="login-info">
+            <div>
+                <label class="text-primary" >Contraseña: </label>
+                <div>
+                    <input id="seckey1" class="form-control " type="password" autofocus=""></input>
+                </div>
+            </div>
+
+            <div>
+                <label class="text-primary">Reescriba la contraseña: </label>
+                <div>
+                    <input id="seckey2" class="form-control " type="password"></input>
+                </div>
+            </div>
+
+        </div>
+        <span class="alert alert-danger alert-create-key"></span>
+        <span class="alert alert-success success-create-key">
+            <label>Ya tienes contraseña! Puedes inciar sesión con cualquiera de los datos verificados (correo o telefono).</label>
+            <label>Para cambiar tu contraseña haz click <a href="{{path('recoveryKey')}}">aqui</a>.</label>
+
+        </span>
+    </div>
+
+    <img id="creating-key-processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+
+    <div>
+
+        <button id="create-key" type="button" class="btn btn-primary btn-lg">Continuar</button>
+    </div>
+
+{%endif%}

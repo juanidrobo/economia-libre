@@ -1,0 +1,135 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/profile.css') }}" >
+{%endblock %}
+{%block body %}
+    <input class="verification" type="hidden" value=""/>
+
+    <div class="card" >
+        <div class = "card-header">
+            <h3><b>Perfil público de usuario</b></h3>
+            {%if userSession %}
+                <a href="{{path('profile')}}?info={{userSession.code}}" >Ver mi perfil público ({{userSession.getDisplayName}})</a>
+            {%endif%}
+            <div>
+                <a href="#" onclick="otherPublicProfile()" >Ver otro perfil público </a>
+            </div>
+            <label >
+                Información verificada y pública del usuario, monedas creadas, monedas utilizadas, comentarios sobre las monedas creadas que han sido utilizadas por otros.
+            </label>
+        </div>
+
+        <div class="card-block">
+            <div class="login">
+                <input id="userCode" type="hidden" value="" />
+
+                <div  style="float:left;margin:0px 30px 10px 0px">
+                    <label>Correo electrónico:</label>
+                    <input class="form-control email" type="email" value="" placeholder="nombre@ejemplo.org" autofocus="" />
+                </div>
+
+                <div  style="display: inline-block;"  >
+                    <label>O telefono:</label>
+                    <div>
+                        <input value="+57" class="form-control" maxlength="5" placeholder="Indicativo" style="width: 70px !important" id="country_code" />
+                        <input class="form-control" maxlength="20" placeholder="numero de celular" id="profile_phone_number"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div-contact-info">
+                <div class="lead">
+                    <label>Nombre:</label>
+                    <div><label class="lead info user-name text-primary"></label></div>
+                </div>
+                <label class="lead verified">Información verificada:</label>
+                <label class="alert alert-danger not-verified">Este usuario no ha sido verificado.</label>
+                <div class="info-email">
+
+                    <div><label class="lead info text-primary user-email"></label></div>
+                </div>
+
+                <div class="info-phone">
+
+                    <div><label class="info lead text-primary user-phone"></label></div>
+
+                </div>
+
+
+
+                <button id="btnShowUserEmails" class="btn btn-primary btn-sm" >Ver otros correos</button>
+                <div class="info-others-emails">
+                    <label>Otros correos electrónicos:</label>
+
+                </div>
+
+                <button id="btnShowUserPhones" class="btn btn-primary btn" >Ver otros telefonos</button>
+
+                <div class="info-others-phones">
+                    <label>Otros telefonos:</label>
+
+                </div>
+
+                <div class="info-networks">
+
+
+                </div>
+            </div>
+            <div id="div-history-promises">
+                <hr>
+
+                <div >
+                    {{ include ('AppBundle:profile:created-promises.html.twig') }}
+                </div>
+                <hr>
+                <div >
+                    {{ include ('AppBundle:profile:received-reviews.html.twig') }}
+                </div>
+                <hr>
+
+                <div >
+                    {{ include ('AppBundle:profile:written-reviews.html.twig') }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+
+            <div>
+                <button type="button" class="btn btn-primary btn-lg btn-profile">Continuar</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+            </div>
+            <div>
+                <div> <span class="alert alert-danger"></span></div>
+            </div>
+
+        </div>
+    </div>
+{%endblock%}
+
+
+
+{% block js %}
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/jquery.dotdotdot.min.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/profile/profile.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/profile/created-promises.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/profile/received-reviews.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/profile/written-reviews.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/translate-actions.js')}}"></script>
+
+
+
+    <script>
+                    var getProfileUrl = "{{ path('getProfile') }}";
+                    var autoEmail = "{{ autoEmail }}";
+                    var autoPhone = "{{ autoPhone }}";
+                    var autoInfo = "{{ autoInfo }}";
+    </script>
+
+{%endblock%}
+

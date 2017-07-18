@@ -1,0 +1,6 @@
+<h1> Alguien ha reclamado tu moneda! </h1>
+<div><b>{{object.owner.getDisplayName()}} ha reclamado tu moneda. Haz click en el link para verla.</b></div>
+<div><b>Cumple con lo que prometiste.</b></div>
+{% set code=object.promise.code %}
+<a href="{{ url('promise',{'code': code}) }}">{{ url('promise',{'code': code}) }}</a>
+

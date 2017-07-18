@@ -1,0 +1,63 @@
+#actions-body input{
+    max-width: 250px;
+    width: 100% !important;
+    font-size: 18px !important;
+}
+
+.processing-image{
+    display:none;
+}
+
+.div-actions .alert{
+    display:none;
+}
+
+#actions-body .btn {
+    font-weight: bold;;
+}
+
+
+.verified-email{
+    display: none;
+}
+.div-action{
+    display: none;
+}
+.div-btns{
+    margin-top: 5px; 
+}
+.btn-actions .btn-primary{
+    margin-top: 10px;
+}
+
+.public-key-actions,.grab-anonymous-actions{
+    display:none;
+}
+
+
+@media screen and (max-width: 510px) {
+  
+    .btn-lg{
+        font-size: 1rem;
+        font-weight: bold;  
+    }
+    h3{
+        font-size:1.5rem;
+    }
+    label{
+        font-size:0.9rem;
+    }
+}
+@media screen and (max-width: 400px) {
+  
+    .btn-lg{
+        font-size: 0.8rem;
+        font-weight: bold;  
+    }
+      label{
+        font-size:0.8rem;
+    }
+      h3{
+        font-size:1.3rem;
+    }
+}

@@ -1,0 +1,69 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/index/index.css') }}" >
+{%endblock%}         
+
+{%block body %}
+    <div class="card" >
+        <div class = "card-header ">
+            <h3><b>Economía Libre</b></h3>
+        </div>
+        <div class="card-block">
+            <ul>
+                <li>
+                    <label class="lead">
+                        <a href="{{path('newPromise')}}">Crea tu moneda</a>, dinero, billete, instrumento de intercambio libre, o como quieras decirle. 
+                    </label> 
+                </li>
+
+                <li>
+
+                    <label class="lead">
+                        Cada moneda es una promesa que cambiarás por algo que quieras de otros.
+                    </label>
+
+                </li>
+                <li>
+                    <label class="lead">
+                        Circulará entre <a href="{{path('profile')}}">varias personas</a>, siendo intercambiada por otros bienes y/o servicios.
+                    </label>
+                </li>
+                <li>
+                    <label class="lead">
+                        Cumple tu palabra cuando alguien reclame lo que prometiste.
+                    </label>
+                </li>
+                <li>
+                    <label class="lead">
+                        Tu palabra ganará reputación, <a href="{{'history'}}">tu moneda valor</a>.
+                    </label>
+                </li>
+
+            </ul>
+
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-lg btn-new" >Crear moneda</button>
+            <button type="button" class="btn btn-primary btn-lg btn-history">Mis monedas</button>
+            <button type="button" class="btn btn-primary btn-lg btn-myProfile">Mi perfil</button>
+            <button type="button" class="btn btn-primary btn-lg btn-publicProfile" >Perfil público</button>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{%block js %}
+    <script src="{{ asset('bundles/appbundle/js/index/index.js')}}"></script>
+
+    <script>
+        var newPromiseUrl = "{{path('newPromise')}}";
+        var historyUrl = "{{path('myHistory')}}";
+        var myProfileUrl = "{{path('myProfile')}}";
+        var publicProfileUrl = "{{path('profile')}}";
+
+    </script>
+{%endblock%}

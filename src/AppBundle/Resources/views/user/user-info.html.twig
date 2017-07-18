@@ -1,0 +1,140 @@
+{%if userSession%}
+    {% set infoUserCurrentEmail = null %}
+    {% set infoUserCurrentPhone = null %}
+    {% for info in userInfo %}
+        {%if (info.type =="email")%}
+            {%if (info.info == userSession.email )%}
+                {% set infoUserCurrentEmail = info %}
+
+            {%endif%}
+        {%endif%}
+        {%if (info.type =="phone")%}
+
+            {%if (info.info == userSession.phone )%}
+                {% set infoUserCurrentPhone = info %}
+
+            {%endif%}
+        {%endif%}
+    {%endfor%}
+{%endif%}
+
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/user/userinfo.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/titatoggle.min.css') }}" >
+
+{% endblock%}
+
+
+{% block body %}
+
+    {% if error is defined %}
+        <div><span class="alert alert-danger" style="display:inline-block">{{error}}</span></div>
+        {% endif %}
+        {% if success is defined %}
+        <div><span class="alert alert-success" style="display:inline-block">{{success}}</span></div>
+        {% endif %}
+    <div class="card div-edit-user" >
+        <input id="csrf" type="hidden" value="{{csrf}}" />
+        <div class = "card-header">
+            <h3><b>Información de contacto</b></h3> 
+            <label>Esta información es parte del valor de las monedas.</label>
+        </div>
+        <div id="alert-save-data" class="alert alert-danger">Para guardar los cambios dale click en el boton de abajo!</div>
+        <div class="card-block">
+            {%if userSession%}
+                <input type="hidden" id="userCode" value="{{userSession.code}}" />
+                <ul class="nav nav-tabs">
+                    <li class="nav-item "><a data-toggle="tab" href="#contactInfo" class="nav-link text active">Información de contacto</a></li>
+                    <li class="nav-item "><a data-toggle="tab" href="#socialInfo" class="nav-link text">Redes sociales</a></li>
+                    <li class="nav-item "><a data-toggle="tab" href="#moreOptions" class="nav-link more">+</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="contactInfo" class="tab-pane fade in active show">
+
+                        {{ include ('AppBundle:user:contact-info.html.twig') }}
+                    </div>
+                    <div id="socialInfo" class="tab-pane fade">
+                        {{ include ('AppBundle:user:social-info.html.twig') }}
+
+                    </div>
+                    <div id="moreOptions" class="tab-pane fade">
+                        {{ include ('AppBundle:user:security-info.html.twig') }}
+                    </div>
+
+                </div>
+            {%else%}
+                {{ include ('AppBundle:index:login.html.twig') }}
+            {%endif%}
+
+        </div>        
+        <div class="card-footer">
+
+
+            <div id="alert-user-info">
+                <span class="alert alert-danger alert-danger-user-edit"></span>
+                <span class="alert alert-success alert-success-user-edit"></span>
+
+            </div>
+
+            <div>
+                <button type="button" id="btn-save-changes1" class="btn btn-primary btn-lg" disabled="true">
+                    <span >Guardar cambios</span>
+                </button>
+                <button type="button" id="btn-cancel-changes" class="btn btn-primary btn-lg">
+                    <span >Cancelar</span>
+                </button>
+                <button type="button" id="btn-save-changes2" class="btn btn-primary btn-lg">
+                    <span >Guardar cambios</span>
+                </button>
+
+            </div>
+            <img id="processing-image-user-edit" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+        </div>
+    </div>
+
+    <hr style="display: block;">
+{%endblock%}
+
+
+{% block js %}
+
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/jquery.dotdotdot.min.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/user/userinfo.js')}}"></script>
+    {#to prevent duplicate js, base.html.twig load this info if the user is not loggedin, but in here we need this info when login#}
+    {%if userSession%}
+        <script src="https://sdk.accountkit.com/es_LA/sdk.js" async="true"></script>
+        <script src="{{ asset('bundles/appbundle/js/login/google/google.api.js')}}"></script>
+
+        <script src="{{ asset('bundles/appbundle/js/user/accountFbKit-userinfo.js')}}"></script>
+        <script src="{{ asset('bundles/appbundle/js/user/fblogin-userinfo.js')}}"></script>
+        <script src="{{ asset('bundles/appbundle/js/user/glogin-userinfo.js')}}"></script>
+        <script src="{{ asset('bundles/appbundle/js/user/twlogin-userinfo.js')}}"></script>
+        <script src="{{ asset('bundles/appbundle/js/user/create-key.js')}}"></script>
+        <script>
+            var editUserUrl = "{{ path('editUser') }}";
+            //account kit info
+            var getInfoFbKitUrl = "{{ path('getInfoFbKit') }}";
+            var fb_account_kit_version = "{{fb_account_kit_version}}";
+
+            // fb info
+            var fb_client_id = "{{fb_client_id}}"
+            var fb_client_version = "{{fb_client_version}}";
+
+            //g info
+            var g_client_id = "{{g_client_id}}";
+            var g_api_key = "{{g_api_key}}";
+
+            //loginUrls
+            var fbLoginUrl = "{{path('fbLogin')}}";
+            var gLoginUrl = "{{path('gLogin')}}";
+            var twLoginUrl = "{{path('twLogin')}}";
+            // create password
+            var createSecKeyUrl = "{{ path('createSecKey') }}";
+        </script>
+    {%endif%}
+{% endblock %}

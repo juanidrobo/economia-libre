@@ -1,0 +1,7 @@
+web:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+phax:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /

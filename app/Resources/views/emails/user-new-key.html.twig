@@ -1,0 +1,5 @@
+<h1> Nueva contraseña! </h1>
+<div><b>Haz click en el link para obtener una nueva contraseña.</b></div>
+{% set code = user.code ~ '&' ~ user.Verification %}
+<a href="{{ url('newKey',{'code': code}) }}">{{ url('newKey',{'code': code}) }}</a>
+

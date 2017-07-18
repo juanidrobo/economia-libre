@@ -1,0 +1,40 @@
+<div class="card div-action panel-grab-promise">
+    <div class="card-header close">X</div>
+    <div class="card-header">
+
+
+        <label  class="text-primary"> 
+            <label class="lead"><b>Recoger</b></label> 
+            <label> - Esta moneda ha sido liberada. </label>
+        </label>
+
+    </div>
+
+    <div class="card-block">
+
+        <div>
+            <label class="text-primary"> Si continuas, esta moneda será tuya. Tú serás el dueño de la moneda, podrás LIBERAR, TRANSFERIR o RECLAMAR esta moneda. </label>
+        </div>
+
+        <span class="alert-danger"></span>
+        <div><span class="lead alert-success"></span></div>
+    </div>
+    <div class="card-footer">
+
+        <!-- botones para validacion de usuario existente -->
+        <button type="button" class="btn btn-primary btn-lg btn-grab">Recoger moneda</button>
+
+
+        <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+
+
+
+    </div>
+</div>
+
+<input type="hidden" id="promise-pubkey" value=""></input>
+<script src="{{ asset('bundles/appbundle/js/actions/action-grab.js')}}"></script>
+<script>
+    var grabPromiseUrl = "{{ path('grabPromise') }}";
+</script>

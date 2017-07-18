@@ -1,0 +1,5 @@
+<h1> Tu moneda ha sido creada! </h1>
+<div><b>Haz click en el link para activarla.</b></div>
+{% set code = object %}
+<a href="{{ url('activatePromise',{'code': code}) }}">{{ url('activatePromise',{'code': code}) }}</a>
+

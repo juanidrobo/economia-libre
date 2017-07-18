@@ -1,0 +1,52 @@
+{% extends "AppBundle::base.html.twig" %}
+{%block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/user/recovery-key.css') }}" >
+{%endblock%}
+{%block jsHead %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+
+
+{% block body %}
+    <div class="card " >
+        <div class = "card-header">
+            <h3><b>Recuperar contraseña</b></h3> Escribe tu correo y recibirás un link para una nueva contraseña.
+        </div>
+        <div class="card-block">
+
+            <div>
+                <label class="text-primary lead"><b>Tu correo electrónico:</b></label>
+
+                <p class="form-inline form-group"><input class="form-control " type="email" placeholder="nombre@ejemplo.org" autofocus=""></input></p>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="{{recaptcha_key}}"></div>
+
+        </div>
+
+        <div class="card-footer">
+
+
+            <div >
+                <button type="button" class="btn btn-primary btn-lg">Continuar</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert alert-danger"></span>
+                <span class="lead alert alert-success"></span>
+            </div>
+
+        </div>
+    </div>
+
+
+{%endblock%}
+
+{%block js %}
+    <script src="{{ asset('bundles/appbundle/js/user/recovery-key.js')}}"></script>
+
+    <script>
+        var notifyNewKeyUrl = "{{ path('notifyNewKey') }}";
+    </script>
+{%endblock%}
+
+

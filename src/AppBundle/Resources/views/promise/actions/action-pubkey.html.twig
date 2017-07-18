@@ -1,0 +1,42 @@
+<div class="card div-action panel-public-key">
+    <div class="card-header close">X</div>
+    <div class="card-header">
+
+        <label class="text-primary lead"><b>Liberar esta moneda con protección. Llave pública.</b></label>
+
+    </div>
+    <div class="card-block">
+        <button type="button" class="btn btn-primary btn-lg btn-public-key-show"> Liberar con protección ...</button>
+        <div class="public-key-actions ">
+            <div>
+                <label class="text-warning lead "> <b> Únicamente la podrá RECOGER quien conozca la llave pública. </b> </label>
+            </div>
+            <div class = "panel-info">
+                <label  class="text-primary "> <b>Nueva llave pública:</b></label>
+            </div>
+            <p>
+                <input class="form-control publickey" type="password"  ></input>
+            </p>
+
+            <div class = "panel-info">
+                <label  class="text-primary"> <b>Reescriba la nueva llave pública:</b></label>
+            </div>
+            <p>
+                <input class="form-control publickey2" type="password"  ></input>
+            </p>
+
+        </div>
+
+        <span class="alert alert-danger"></span>
+        <div><span class="lead alert alert-success"></span></div>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-primary btn-lg btn-public-key public-key-actions">Liberar moneda con protección</button>
+        <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+    </div>
+</div>
+<script src="{{ asset('bundles/appbundle/js/actions/action-pubkey.js')}}"></script>
+<script>
+    var newPublicKeyUrl = "{{ path('newPublicKey') }}";
+</script>

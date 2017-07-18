@@ -1,0 +1,7 @@
+<h1> Te han transferido una moneda! </h1>
+<div><b>{{object.owner.getDisplayName()}} te ha transferido una moneda. Haz click en el link para activarla.</b></div>
+{% set code=object.promise.code ~ "&" ~ object.code %}
+</br>
+<div>
+<a href="{{ url('activatePromise',{'promiseCode': object.promise.code,'eventCode':object.code}) }}">{{ url('activatePromise',{'promiseCode': object.promise.code,'eventCode':object.code})}}</a>
+</div>

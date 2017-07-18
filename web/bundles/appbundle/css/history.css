@@ -1,0 +1,132 @@
+.processing-image{
+    display: none;
+    margin-left: -5px;
+}
+
+.description{
+    font-size: 1.1rem;
+    max-width: 400px;
+    font-weight: bold;
+}
+
+th{
+    font-size: 1.1rem;
+}
+
+td{
+    max-width: 500px;
+}
+
+
+
+#table-created-promises, #table-own-promises, #table-received-reviews, #table-written-reviews{
+    display: none;
+}
+
+
+#btn-more-created-promises, #btn-more-own-promises, #btn-more-received-reviews,#btn-more-written-reviews{
+    display:none;
+}
+
+.card-block hr{
+
+    height: 12px;
+    background-color: #eee;
+}
+
+.display-name{
+    width: 200px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.actions{
+    max-width: 250px;
+}
+.date-action{
+    font-size: 0.7rem;
+
+}
+.text-action{
+    font-weight: bold;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+.responsive-actions{
+    display:none;
+    margin-top: 6px;
+    max-width: 220px;
+}
+
+.btn-sm{
+    margin-top: 3px;
+}
+
+.checkbox{
+    margin-top: 6px;
+}
+.text-checkbox{
+    margin-bottom:0rem;
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 767px) {
+    .description{
+        font-size: 0.95rem;
+    }
+    .text-action{
+        font-size: 0.85rem;
+    }
+}
+@media screen and (max-width: 680px) {
+    .description{
+        font-size: 0.90rem;
+    }
+    .text-action{
+        font-size: 0.8rem;
+    }
+}
+@media screen and (max-width: 600px) {
+    .description{
+        font-size: 0.87rem;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .responsive-actions{
+        display: block;
+    }
+    .actions{
+        display: none;
+    }
+    .btn-lg{
+        font-size: 1rem;
+        font-weight: bold;  
+    }
+}
+@media screen and (max-width: 480px) {
+
+    .btn-lg{
+        font-size: 0.9rem;
+        padding: .8rem 1rem;
+
+    }
+}
+@media screen and (max-width: 450px) {
+
+    .btn-lg{
+        font-size: 0.8rem;
+        padding: .7rem 0.9rem;
+    }
+}
+@media screen and (max-width: 400px) {
+
+    .btn-lg{
+        font-size: 0.75rem;
+        padding: 0.5rem 0.7rem;
+
+    }
+
+}
+
+

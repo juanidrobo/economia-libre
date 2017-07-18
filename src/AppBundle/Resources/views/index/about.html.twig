@@ -1,0 +1,170 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/index/about.css') }}" >
+{% endblock%}
+
+{% block jsHead %}
+    <script src='https://www.google.com/recaptcha/api.js' async="true"></script> 
+{%endblock%}
+
+{% block body %}
+
+    <div class="card" >
+        <div class = "card-header ">
+            <h3><b>Economía Libre</b></label>
+        </div>
+        <div class="card-block">
+
+            <label class="lead"> <b>¿Economía libre?</b></label>
+
+            <p >
+                Economía basada en <b>monedas de valor real.</b>
+                La creación o emisión de la moneda es pública.
+                Cada persona o grupo de personas tiene el derecho a crear monedas de valor real, cambiarlas por productos o servicios, cambiarlas por otras monedas de valor real y/o recibir pagos en moneda de valor real por productos o servicios prestados.
+
+
+            </p>
+
+            <label class="lead"><b>¿Que es una moneda de valor real?</b></label>
+            <p>
+                El valor real es la promesa de un producto o la promesa de un servicio, una moneda puede tener la promesa de un kilo de sal, la promesa de una una silla, la promesa de un almuerzo, la promesa de una clase de guitarra o la promesa de un masaje etc.
+                La moneda de valor real esta respaldada por una o varias personas. CREADOR(ES).
+                <b>El dueño de una moneda de valor real al RECLAMAR el valor a su CREADOR, tendrá a cambio algo tangible o experimentable, producto o servicio prometido en la moneda.</b>
+                Cada persona puede crear monedas con diferentes valores o promesas, recibir pagos con moneda de valor real o crear tantas monedas como quiera.
+                <a href='#whatif'>¿Que pasa cuando RESPONDES por lo prometido?</a>
+                <a href='#whatif'>¿Que pasa si, NO RESPONDES por lo prometido?</a>
+
+            </p>
+
+            <label class="lead text-danger"><b>¿Que es una moneda de valor imaginario?</b></label>
+            <p> 
+                <b>El dueño de una moneda imaginaria al RECLAMAR el valor a su CREADOR NO obtendrá algo de valor tangible o experimentable</b>. El valor de la moneda es un número. 
+                La moneda imaginaria se crea o emite a espaldas de la mayoría de usuarios. <b>La creación de la moneda imaginaria es centralizada.</b>               
+                Una minoria de usuarios son los encargados de crear la moneda que todos utilizan.
+            </p>
+
+            <label class="lead text-warning"><b>¿En que se parecen las monedas de valor real con las monedas de valor imaginario?</b></label>
+            <p> 
+                Tanto las monedas reales como las monedas imaginarias pueden ser cambiada por productos o servicios.
+
+            </p>
+
+            <label class="lead text-warning"><b>¿En que se diferencian las monedas de valor real con las monedas de valor imaginario?</b></label>
+            <p>   
+                <b>En las imaginarias se cambia un número por algo de valor real:</b>
+                <br> Te doy 500 (pesos, euros, dolares, etc) a cambio de tu bufanda.
+                <br><b> En las reales se cambia un valor real por otro valor real:</b>
+                <br>te doy <a href="{{path('promise',{'code':'7eb4cb07-48ac-11e7-b796-1867b0808fb5'} ) }}" target="_blank" class="text-primary lead">2 almuerzos respaldados por Pepita Pepona</a> a cambio de tu bufanda. 
+            </p>
+
+            <p>
+                En las dos monedas en cada transacción se puede pedir un cambio en el valor, en las imaginarias el dueño de la bufanda pide 700 (pesos, dolares, yenes, etc) por la bufanda. 
+                En las monedas de valor real pasa lo mismo, se ofrecen 2 monedas, cada una valida por un almuerzo respaldados por Pepita Pepona. El dueño de la bufanda pide que ademas le aumente otra moneda. Se le ofrece ademas de los dos almuerzos, un paseo de perro del entrenador de perros Rafuno Gatuno.    
+
+            </p>
+
+            <label id="whatif" class="lead" ><b>¿Que pasa cuando RESPONDES por lo prometido?</b></label>
+            <p>
+                Cuando RESPONDES por lo prometido, la persona que RECLAMO, la moneda creada por Ti, comentará su experiencia. Ese  comentario puede ser visto en tus referencias públicas.
+                Por cada buen comentario tu moneda tendrá mas valor ante los ojos de los que reciban tus monedas. Mas monedas cumplidas, mas comentarios de los usuarios, tu reputación aumentara y con ella el valor de tus monedas.
+            </p>
+            <label class="lead"><b>¿Que pasa cuando NO RESPONDES por lo prometido?</b></label>
+            <p>
+                Pasa todo lo contrario a lo anterior.  
+            </p>
+
+            <label class="lead"><b>¿Como creo una moneda de valor real o moneda libre?</b></label>
+            <p>
+                En el menú de arriba tienes el link <a class="text-primary lead" href="{{ url('newPromise')}}">Crear moneda</a>,
+                allí escribes una promesa, puedes poner las condiciones y restricciones que tu quieras, eso también entra a jugar en el momento de ofrecer la moneda.
+                <b>Cada moneda creada tiene un link unico, el cual es solamente conocido por su creador.</b>
+            </p>
+            <label class="lead"><b>¿Como intercambio una moneda de valor real por algo que quiero de otros?</b></label>
+            <p>
+                Cada moneda de valor real, creada o recibida, pertenece a un solo usuario, <b>el dueño actual de la moneda</b>, y este es el unico que puede realizar acciones sobre la moneda (LIBERAR, TRANSFERIR, RECLAMAR). 
+                <b>Compartiendo el link de la moneda, esta puede ser mostrada a otros para llegar a un acuerdo.</b>
+                En la moneda se puede ver quien es el CREADOR o responsable de esta, en la pagina del CREADOR se puede ver lo comentado por otras personas.
+                Después de llegar a un acuerdo, se transfiere la o las monedas y se recibe lo que el otro tiene para ofrecer.
+            </p>
+
+            <label class="lead"><b>¿Como transfiero una moneda de valor real?</b></label>
+
+            <p>
+                En la moneda de valor real, <b>el dueño actual de la moneda es el único que puede tomar acciones sobre ella.</b>    
+                Hay dos opciones, <b>LIBERAR y TRANSFERIR</b>.
+            <p>
+                Puede <b>LIBERAR</b> la moneda y así cualquier otra persona que entre a la pagina de la moneda podrá <b>RECOGERLA</b>.
+                <b>Cuando una moneda es RECOGIDA, la moneda cambía de dueño.</b> Los dueños anteriores pueden ver la moneda porque es la misma dirección, pero NO pueden tomar acciones sobre ella.
+            </p>
+            <p>
+                La opción <b>TRANSFERIR</b> permite enviar la moneda a un correo electrónico. Después de TRANSFERIR la moneda ya no podrás realizar acciones sobre esta, el único que puede tomar acciones sobre la moneda es el receptor de la transferencia.
+                El receptor tiene 7 días para confirmar la transferencia, de lo contrario esta se cancelará y el dueño volverá a ser el anterior.
+            </p>
+            <label class="lead"><b>¿Como recibo monedas de valor real?</b></label>
+
+            <p>
+                Después de <b>LIBERAR</b> la moneda <b>alguien te pasa el link</b> de esta. Podrás ver la opción <b>RECOGER</b> activada, haz click y confirmá la <b>RECOGIDA</b> de la moneda.
+                <b>Ahora la moneda es tuya, eres el dueño actual.</b>
+            </p>
+            <p>
+                La otra forma es cuando alguien la transfiere a tu correo electrónico, te llegará un correo con un link de confirmación o puedes confirmar la transferencia en <a class="text-primary lead" href="{{ url('myHistory')}}">Mis monedas</a>.
+                Tienes 7 días para confirmar la transferencia, de lo contrario esta se cancelará y el dueño volverá a ser el anterior.
+
+            </p>
+            <label class="lead"><b>¿Como obtengo el valor real de una moneda? </b></label>
+
+            <p>
+                Solamente el dueño actual de una moneda de valor real puede <b>RECLAMAR</b> el valor a su CREADOR. 
+                El creador o responsable será notificado y la moneda cambiará a el estado de <b>RECLAMADA</b>.
+                La opción de <b>COMENTAR</b> se activará para comentar sobre lo recibido y crear una referencia que sea útil para los demas.
+                <b>Se recomienda notificar a el CREADOR directamente a travez de la información de contacto (correo, telefono, redes sociales) en el perfil público del creador.</b>
+            </p>
+
+            <label class="lead"><b>¿Que es el perfil público? </b></label>
+
+            <p>
+                Esta pagina <a class="text-primary lead" href="{{path ('profile')}}">Perfil público</a> permite ver la información pública de cada usuario.  
+                El usuario decide que información desea compartir, esa información hace parte del valor de las monedas creadas. Entre mas información tenga un CREADOR, mas confiable será.
+            </p>
+
+            <label class="lead"><b>¿Cuales son los estados de cada moneda? </b></label>
+
+            <p>
+                CREADA, TRANSFERIDA, RECOGIDA, LIBERADA, RECLAMADA, COMENTADA.
+            </p>
+
+            <hr>
+
+            <label class="lead"><b>¿Otra pregunta? Ayudanos a entender como exponer el funcionamiento de la Economía libre. </b></label>
+            <input id="question" class="form-control " type="text"  ></input>
+
+            <div>
+                <div class="g-recaptcha" data-sitekey="{{recaptcha_key}}"></div> 
+                <span class="lead alert-success"></span>
+                <span class="alert-danger"></span>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <div>
+                <button class="btn btn-primary btn-lg btn-question">Enviar pregunta</button>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/appbundle/js/index/about.js')}}"></script>
+
+
+    <script>
+        var newQuestionUrl = "{{path('newQuestion')}}";
+    </script>
+{% endblock %}
+
+
+

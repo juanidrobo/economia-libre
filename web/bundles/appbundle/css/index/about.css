@@ -1,0 +1,21 @@
+ul li label{
+    display:block;
+}
+
+hr{
+    height: 7px;
+    background-color: #eee; 
+    margin-top: 44px;
+    max-width: 700px;
+    margin-left: 0px;
+    
+}
+
+.processing-image{
+    display: none;
+}
+
+input{
+    max-width: 100%;
+    margin-bottom: 10px;
+}

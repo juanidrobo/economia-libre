@@ -1,0 +1,29 @@
+<div class="card div-action panel-transfer ">
+    <div class="card-header close">X</div>
+    <div class="card-header">
+
+        <label class="text-primary lead"><b>Transferir moneda</b> </label>
+
+    </div>
+    <div class="card-block">
+
+
+        <div >
+            <label  class="text-primary lead"> <b>Correo electrónico a transferir:</b></label>
+
+            <p>
+                <input class="form-control email-to-transfer " type="email" autofocus=""  ></input>
+            </p>
+        </div>
+        <span class="alert-danger"></span>
+        <div><span class="alert alert-success"></span></div>  
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-primary btn-lg btn-transfer">Transferir</button><img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+    </div>
+</div>
+<script src="{{ asset('bundles/appbundle/js/actions/action-transfer.js')}}"></script>
+<script>
+    var transferUrl = "{{ path('transfer') }}";
+</script>

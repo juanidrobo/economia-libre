@@ -1,0 +1,27 @@
+<button type="button" id="btn-created-promises"class="btn btn-primary btn-lg" >Monedas creadas <span id="count-created-promises"></span></button>
+
+
+<table id="table-created-promises" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Moneda creadas por <span class="user-name"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>  
+                <button id="btn-more-created-promises" type="button" class="btn btn-primary btn">Ver mas</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert-danger"></span>
+            </td>
+        </tr>
+
+    </tfoot>
+</table>
+<script>
+    var getMoreCreatedPromisesUrl = "{{path('getMoreProfileCreatedPromises')}}";
+</script>

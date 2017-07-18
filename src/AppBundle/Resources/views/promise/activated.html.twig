@@ -1,0 +1,33 @@
+{% extends "AppBundle::base.html.twig" %}
+{%block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/activated.css') }}" >
+{%endblock%}
+
+{%block body %}
+    <div class="card">
+
+        <div class="card-header">
+            <h3>La moneda que te transfirió <b> {{event.owner.getDisplayName()}} </b> ahora es tuya!</h2>
+        </div>
+        <div class="card-block">
+            <div><b>Ya puedes ponerla en circulación.</b></div>
+            <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+        </div>   
+
+
+    </div>
+
+
+{%endblock%}
+
+
+{%block js %}
+    <script>
+
+        function goToPromise() {
+            window.location = "{{url('promise',{'code':promise.code})}}";
+        }
+        setTimeout(goToPromise, 3000);
+    </script>
+{%endblock%}

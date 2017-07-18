@@ -1,0 +1,144 @@
+
+<table id="tableSocialInfo" class="table table-striped">
+    <thead>
+        <tr>
+
+            <th>
+                <label>
+                    Red social
+                </label>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% set twitter=false %}
+        {%set google=false %}
+        {%set facebook=false %}
+        {%for userNetwork in userNetworks%}
+            {%if userNetwork.name=="tw"%}
+                {% set twitter=true %}
+            {%endif%}
+            {%if userNetwork.name=="g"%}
+                {% set google=true %}
+            {%endif%}
+            {%if userNetwork.name=="fb"%}
+                {% set facebook=true %}
+            {%endif%}
+            <tr>
+
+
+
+                {%if userNetwork.userName and userNetwork.userNameVerified %}
+                    <td>           
+                        <div class="social-network">
+                            <input class="network-code" type="hidden"  value="{{userNetwork.code}}"/>
+                            {%if ("https://" in userNetwork.userName) or ("http://" in userNetwork.userName) %}
+                                <a class="link-social" href="{{userNetwork.userName}}"> {{userNetwork.userName}}</a>
+
+                            {%else%}
+                                <a class="link-social" href="{{userNetwork.displayUrl}}/{{userNetwork.userName}}"> {{userNetwork.displayUrl}}/{{userNetwork.userName}}</a>
+                            {%endif%}
+                            <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                                <label>
+                                    <input class="inputUserNetwork" type='checkbox' {%if userNetwork.visible %} org_checked=true checked='checked' {%endif%}><span></span>
+                                </label>
+                            </div>
+                            <div class="btn-actions">
+                                <button type="button" class="btn btn-secondary btn-trash-social" {%if not userNetwork.userName %} style="display:none" {%endif%}>
+                                    <span class="fa fa-trash-o fa-lg "></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-refresh-social">
+                                    <span class="fa fa-refresh fa-lg"></span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </td>
+                {%else%}
+                    <td class="table-danger">
+                        <label id="label-ask-fb-username" {%if userNetwork.username %}style="display:none"{%endif%}>Facebook no comparte esta información. Agregala tu.</label>
+
+                        <label id="label-confirm-fb" {%if not userNetwork.username %}style="display:none"{%endif%}>Verfica esta información enviando un mensaje a este <a target="_blank" href="{{fb_client_page}}">perfil</a> en fb.</label>
+
+                        <div class="div-edit-network-user" >
+                            <input class="last-fb-username" type="hidden"  value="{{userNetwork.username}}"/>
+                            <input class="network-code" type="hidden"  value="{{userNetwork.code}}"/>
+
+                            <label id="label-network-url">https://www.{{userNetwork.displayName|lower}}/</label>
+                            <input type="hidden" class="form-control" {%if userNetwork.userName%} value="{{userNetwork.userName}}" {%else%} value="" {%endif%}   />
+                            <input id="fb-given-username" class="form-control" {%if userNetwork.userName%} readonly="" value="{{userNetwork.userName}}"{%else%} value=""{%endif%}   autofocus=""  />
+
+                            <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                                <label>
+                                    <input class="inputUserNetwork" type='checkbox' {%if userNetwork.visible %} org_checked=true checked='checked' {%endif%}><span></span>
+                                </label>
+                            </div>
+
+                            <div class="btn-actions">
+                                <button type="button" class="btn btn-secondary btn-edit-social" {%if not userNetwork.userName %} style="display:none" {%endif%} >
+                                    <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true" ></span>
+                                </button>
+
+                                <button type="button" class="btn btn-secondary btn-ok-social" {%if userNetwork.userName %} style="display:none" {%endif%} >
+                                    <span class="fa fa-check" ></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-cancel-social" {%if userNetwork.userName %} style="display:none" {%endif%} >
+                                    <span class="fa fa-times" ></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-trash-social" {%if not userNetwork.userName %} style="display:none" {%endif%}>
+                                    <span class="fa fa-trash-o fa-lg"></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-refresh-social">
+                                    <span class="fa fa-refresh fa-lg"></span>
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </td>
+                {%endif%}
+
+
+
+
+
+
+
+
+            </tr>
+
+        {%endfor%}
+        <tr>
+            <td>
+
+                <span class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {%if not twitter %}
+                            <a id="link-tw-login" class="dropdown-item" href="#">Twitter</a>
+                        {%endif%}
+                        {%if not google %}
+                            <a id="link-g-login" class="dropdown-item" href="#" disabled="">Google+</a>
+                        {%endif%} 
+                        {%if not facebook%}
+                            <a id="link-fb-login" class="dropdown-item" href="#">Facebook</a>
+                        {%endif%}
+                    </div>
+                </span>
+                <img id="adding-processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+<span class="alert alert-danger alert-add-social"></span>
+<span class="alert alert-success success-add-social"></span>
+
+
+
+

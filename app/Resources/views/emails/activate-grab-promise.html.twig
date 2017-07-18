@@ -1,0 +1,5 @@
+<h1> Has recogido una moneda! </h1>
+<div><b>Haz click en el link para activarla.</b></div>
+{% set code=object.promise.code ~ "&" ~ object.code %}
+<a href="{{ url('activatePromise',{'code': code}) }}">{{ url('activatePromise',{'code': code}) }}</a>
+

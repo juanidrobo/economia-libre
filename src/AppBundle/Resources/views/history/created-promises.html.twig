@@ -1,0 +1,32 @@
+<button type="button" id="btn-created-promises"class="btn btn-primary btn-lg" >Monedas creadas por ti <span id="count-created-promises"></span>
+</button>
+<button id="btn-refresh-created-promises" class="btn btn-primary btn-sm"><span class="fa fa-refresh"></span></button>
+
+<table id="table-created-promises" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Moneda </th>
+            <th></th>
+       
+        </tr>
+    </thead>
+    <tbody>
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>  
+                <button id="btn-more-created-promises" type="button" class="btn btn-primary btn-md">Ver mas</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert-danger"></span>
+            </td>
+        </tr>
+
+    </tfoot>
+    <script></script>
+</table>
+<script>
+    var getMoreCreatedPromisesUrl = "{{path('getMoreCreatedPromises')}}";
+    var togglePromiseUrl = "{{path('togglePromise')}}";
+</script>

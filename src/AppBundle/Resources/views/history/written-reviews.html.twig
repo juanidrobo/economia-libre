@@ -1,0 +1,30 @@
+<button type="button" id="btn-written-reviews"class="btn btn-primary btn-lg" >Monedas utilizadas <span id="count-written-reviews"></span></button>
+<button id="btn-refresh-written-reviews" class="btn btn-primary btn-sm"><span class="fa fa-refresh"></span></button>
+
+<table id="table-written-reviews" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Moneda </th>
+
+            
+        </tr>
+    </thead>
+    <tbody>
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>  
+                <button id="btn-more-written-reviews" type="button" class="btn btn-primary btn-md">Ver mas</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert-danger"></span>
+            </td>
+        </tr>
+
+    </tfoot>
+</table>
+
+<script>
+    var getMoreWrittenReviewsUrl = "{{path('getMoreWrittenReviews')}}";
+</script>

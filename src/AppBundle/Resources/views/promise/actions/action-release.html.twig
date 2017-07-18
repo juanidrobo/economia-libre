@@ -1,0 +1,29 @@
+<div class="card div-action div-release">
+    <span class="card-header close">X</span>
+    <div class="card-header">
+        <label class="text-primary lead" ><b>Liberar esta moneda</b></label>
+
+    </div>
+    <div class="card-block">
+        <div >
+            <label class="text-primary ">Después de liberar la moneda, alguien mas la podrá RECOGER.</label>
+
+            <label class="text-warning lead"><b>Cualquier persona, que conozca la dirección, podrá RECOGER esta moneda.</b></label>
+
+            <label class="text-primary ">Comparte la dirección a la persona indicada.</label>
+
+
+        </div>
+        <span class="alert alert-danger"></span>
+        <div> <span class="lead alert alert-success"></span></div>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-primary btn-lg btn-release">Liberar moneda</button><img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+    </div>
+</div>
+
+<script src="{{ asset('bundles/appbundle/js/actions/action-release.js')}}"></script>
+<script>
+    var releasePromiseUrl = "{{ path('releasePromise') }}";
+</script>   

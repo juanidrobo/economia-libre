@@ -1,0 +1,44 @@
+<div class="card div-action panel-grab-promise panel-grab-promise-pubkey">
+    <div class="card-header close">X</div>
+    <div class="card-header">
+
+        <label class="text-primary lead"> <b>Recoger moneda</b> </label>
+    </div>
+    <div class="card-block">
+        <label class="text-primary lead">Esta moneda esta protegida con una <b>llave pública</b>. Si la conoces será tuya. </label>
+        <div id="action-grab-pubkey" >
+            <div >
+                <label class="text-primary lead"> <b>Llave pública de la moneda:</b></label>
+            </div>
+            <p class="form-inline form-group">
+                <input id="pubkey" class="form-control " type="password" autofocus=""></input>
+            </p>  
+
+            <span class="lead alert alert-success"></span>
+
+            <span class="alert alert-danger"></span>
+            <span class="alert alert-info"></span>
+
+
+
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <div class="div-btns">
+            <!-- botones para validacion de usuario existente -->
+            <button type="button" class="btn btn-primary btn-lg btn-grab-pubkey">Recoger moneda</button>
+
+            <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('bundles/appbundle/js/actions/action-grab-pubkey.js')}}"></script>
+<script>
+    var grabPromiseUrl = "{{ path('grabPromise') }}";
+</script>
+
+<div class="panel-grab-promise-after-pubkey" style="display: none">
+    {{ include ('AppBundle:promise:actions/action-grab.html.twig' , { 'pubkey': true }) }}
+</div>

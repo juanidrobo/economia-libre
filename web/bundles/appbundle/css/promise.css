@@ -1,0 +1,30 @@
+textarea{
+    font-size: 18px !important;
+}
+
+#qrcode{
+    float:right;
+}
+
+.div-actions{
+    display: block;
+}
+
+#div-info{
+    float:left;
+    min-width: 200px;
+}
+.date-action{
+    font-size: 0.7rem;
+
+}
+@media screen and (max-width: 400px) {
+
+    #qrcode{
+        float: left;
+    }
+}
+
+
+
+

@@ -1,0 +1,81 @@
+{% extends "AppBundle::base.html.twig" %}
+{%block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/user/activate-missing-key.css') }}" >
+{%endblock%}
+
+{%block body %}
+    <input type="hidden" id="userCode" value="{{user.code}}" />
+    {{ include ('AppBundle:index:menu.html.twig') }}
+
+    <h3 class="text-primary">Iniciar sesión</h3>
+    <input type="hidden" id="verification" value="{{user.verification}}"></input>
+    <div  class="alert alert-info">Nueva contraseña para <label id="userEmail"><b> {{user.email}}</b> </label></div>
+    {%if errorSocialLogin is defined %}
+        <div style="font-size: 1.1rem; display: inline-block; width: 100%" class="alert alert-danger" >{{errorSocialLogin}}</div>
+    {%endif%}
+
+    <div class="card ">
+        <div class="card-header">
+            <label>El usuario  necesita una sesión. Crea una contraseña o inicia con una red social.</label>
+            <label class="lead">Esto te permitirá liberar, transferir, reclamar, crear y recibir otras monedas.</label>
+        </div>
+        <div class="card-block">
+
+
+            <div class="old-school-login">
+                <div class = "div-password">
+                    <label class="control-label text-primary" ><b>Contraseña: </b></label>
+                    <div>
+                        <input id="seckey1" class="form-control" type="password" autofocus=""></input>
+                    </div>
+                </div>
+                </br>
+
+                <div class="div-password" >
+                    <label class="control-label text-primary"><b>Reescriba la contraseña: </b></label>
+                    <div>
+                        <input id="seckey2" class="form-control " type="password"></input>
+                    </div>
+                </div>
+
+                <span class="alert alert-danger"></span>
+                <span class="alert alert-success"></span>
+
+                <div><button type="button" class="btn btn-primary btn-lg btn-login">Iniciar sesión</button><img id="processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}"></div>
+            </div>
+
+            <div class="social-network-login ">
+                <div style="display: block"><label class="text-primary">Redes sociales:</label></div>
+                <div class="fblogin">
+                    <button class="btn btn-primary btn-lg btn-fb-login">Facebook</button>
+
+                </div>
+                <div class="twlogin">
+                    <button class="btn btn-primary btn-lg btn-tw-login">Twitter</button>
+
+                </div>
+                <div class="glogin">
+                    <button class="btn btn-primary btn-lg btn-g-login" disabled="true">Google</button>
+
+                </div>
+                <img id="login-processing-image" src="{{asset('bundles/appbundle/img/loading-login.gif')}}">
+
+                <div><span class="login alert alert-danger"></span></div>
+            </div>
+
+
+        </div>
+    </div>
+{%endblock %}
+
+{%block js %}
+    <script>
+        var changeKeyUrl = "{{ path('createSecKey') }}";
+        var fbLoginUrl = "{{path('fbLogin')}}";
+        var gLoginUrl = "{{path('gLogin')}}";
+    </script>
+
+    <script src="{{ asset('bundles/appbundle/js/user/new-key.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+{%endblock%}

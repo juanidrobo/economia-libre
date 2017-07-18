@@ -1,0 +1,260 @@
+<br>
+<table class="table">
+    <thead class="thead-default">
+        <tr>
+            <th>
+                <label>Nombre:</label>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div id="div-edit-name" class="info">
+
+                    <input type="hidden" value="{{userSession.Name}}" />
+                    <input class="form-control text-primary" id="input-name"  readonly="" value="{{userSession.name}}" />
+                    <div class="btn-actions">
+                        <button type="button" class="btn btn-secondary btn-edit" >
+                            <span class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-secondary btn-ok" >
+                            <span class="fa fa-check" ></span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-cancel" >
+                            <span class="fa fa-times" ></span>
+                        </button>
+                    </div>
+                </div>
+            </td>
+
+
+        </tr>
+    </tbody>
+</table>
+
+<table id="tableUserInfo" class="table  tableUserInfo">
+    <thead class="thead-default">
+
+        <tr>
+            <th>
+                <label>
+                    Información verificada
+                </label>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <tr>
+
+            <td>
+                <div id="div-edit-email" >
+                    <div><label><b>Correo:</b></label></div>
+                    <div id="div-primary-email">
+                        {%if infoUserCurrentEmail != null %}
+                            <input class="form-control text-primary" id="primaryEmail" readonly="" value="{{userSession.email}}" />
+                        {%endif%}
+                    </div>
+
+
+                    {%if infoUserCurrentEmail!=null%}
+                        <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                            <label>
+
+                                <input class="inputUserInfo email" type='checkbox' {%if infoUserCurrentEmail.visible %} org_checked=true checked='checked' {%endif%}><span></span>
+                            </label>
+                        </div>
+                    {%else%}
+
+                        <button type="button" class="btn btn-secondary btn-add-email">
+                            <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                        </button> 
+
+                    {%endif%} 
+
+
+
+                    <div class="div-alerts">
+                        <span class="alert alert-danger alert-danger-add-email"></span>
+                        <span class="alert alert-success alert-success-add-email"></span>
+                        <img id="processing-image-add-email" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                    </div>
+
+
+
+            </td>
+
+
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <div id="div-edit-phone" class="info">
+                    <div>
+                        <label><b>Telefono:</b></label>
+
+                    </div>
+                    <div id="div-primary-phone">
+                        {%if infoUserCurrentPhone != null%}
+                            <input class="form-control text-primary" id="primaryPhone" readonly="" value="{{userSession.phone}}" />
+
+                        {%endif%}
+
+                    </div>
+
+                    {%if infoUserCurrentPhone!=null%}
+                        <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                            <label>
+                                <input class="inputUserInfo phone" type='checkbox' {%if infoUserCurrentPhone.visible %} org_checked=true checked='checked' {%endif%}><span></span>
+                            </label>
+                        </div>
+                    {%else%}
+                        <button type="button" class="btn btn-secondary btn-add-phone">
+                            <span class="fa fa-plus fa-lg"></span>
+                        </button>
+                    {%endif%}
+
+
+                    <div class="div-alerts">
+                        <span class="alert alert-danger alert-danger-add-phone"></span>
+                        <span class="alert alert-success alert-success-add-phone"></span>
+                        <img id="processing-image-add-phone" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+
+                    </div>
+                </div>
+            </td>
+
+
+
+        </tr>
+
+    </tbody>
+</table>
+
+
+<table id="tableUserEmails" class="table tableUserInfo" {%if (userSession.getEmail()==null) %} style="display:none" {%endif%}> 
+    <thead class="">
+        <tr>
+            <th>
+                <label>
+                    Otros correos:
+                </label>
+                <button type="button" class="btn btn-secondary btn-add-email">
+                    <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                </button> 
+            </th>    
+
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for info in userInfo %}
+            {%if (info.type =="email")%}
+                {%if (info.info != userSession.email)%}
+                    <tr>
+                        <td>
+                            <div class="div-edit-secondary-email">
+
+                                <input class="form-control text-primary" readonly="" value="{{info.info}}" />
+                                <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                                    <label>
+                                        <input class="inputUserInfo email" type='checkbox' {%if info.visible %} org_checked=true checked='checked'{%endif%}><span></span>
+                                    </label>
+                                </div>
+                                <div class="btn-actions">
+                                    <button type="button" class="btn btn-secondary btn-up btn-up-email">
+                                        <span class="fa fa-arrow-up fa-lg"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-trash">
+                                        <span class="fa fa-trash-o fa-lg"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-refresh">
+                                        <span class="fa fa-refresh"></span>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                        </td>
+
+
+
+                    </tr>
+                {%endif%}
+            {%endif%}
+        {%endfor%}
+
+    </tbody>
+</table>
+
+<table id="tableUserPhones" class="table tableUserInfo" {%if (userSession.getPhone()==null) %} style="display:none" {%endif%}>
+    <thead class="">
+        <tr>
+            <th>
+                Otros telefonos:
+                <button type="button" class="btn btn-secondary btn-add-phone">
+                    <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                </button> 
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for info in userInfo %}
+            {%if (info.type =="phone")%}
+                {%if (info.info != userSession.phone)%}
+                    <tr>
+
+                        <td>
+
+                            <div class="div-edit-secondary-phone">
+
+                                <input class="form-control text-primary" readonly="" value="{{info.info}}" />
+                                <div class='checkbox checkbox-slider-lg checkbox-slider--b  checkbox-slider-info '>
+                                    <label>
+                                        <input class="inputUserInfo phone" type='checkbox' {%if info.visible %} org_checked=true checked='checked'{%endif%}><span></span>
+                                    </label>
+                                </div>
+                                <div class="btn-actions">
+                                    <button type="button" class="btn btn-secondary btn-up btn-up-phone">
+                                        <span class="fa fa-arrow-up fa-lg"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-trash">
+                                        <span class="fa fa-trash-o fa-lg"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-refresh">
+                                        <span class="fa fa-refresh fa-lg"></span>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                        </td>
+
+
+
+                    </tr>
+                {%endif%}
+            {%endif%}
+        {%endfor%}
+    </tbody>
+
+</table>
+
+

@@ -1,0 +1,113 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/actions/actions.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/promise.css') }}" >
+{% endblock %}
+
+
+
+{%block body %}
+
+    <input type="hidden" id="promise-code" value="{{promise.code}}"></input>
+    {% set qrcode=promise.code %}
+    {% if (event) %}
+        {% if event.action == "anonymousgrab" %}
+            {% set qrcode = qrcode ~ "&" ~ event.code%}
+            <span class="lead alert-danger">Esta moneda fue recogida anonimámente. Guarda la dirección para poder acceder y compartirla!</span>
+        {% endif %}
+    {% endif %}
+    <div class="card  " >
+        <div class = "card-header">
+            {%if (message)%}
+                <b>
+                    <div class="text-success lead">
+                        {{message[0]}}
+                    </div>
+                </b>
+            {%endif%}
+            <div class="date-action">{{promise.getDate()|date("Y-m-d H:m:s")}}</div>
+            <h3>Moneda respaldada por <b>{{promise.responsible.getDisplayName()}}</b>
+
+            </h3>
+            <a href="{{path('profile')}}?info={{promise.responsible.getCode}}" target="_blank">
+                <div> <b>==> Ver perfil público</b> </div>
+            </a>
+
+        </div>
+        <div class="card-block">
+            <div>
+                <label><b>Descripción de la moneda o promesa: </b></label><textarea readonly class="form-control "  rows="7" >{{promise.description}}</textarea>
+            </div>
+            </br>
+            <div id="div-info">
+
+                <div id="owner">
+
+
+                    {%if (event.action=="anonymousgrab")%}
+                        {% set owner = null %}
+                    {%elseif (event.action=="claim")%}
+                        {% set owner = event.owner %}
+                    {%elseif (event.action=="review")%}
+                        {%set owner = event.owner%}
+                    {%else%}
+                        {% set owner = event.receiver %}
+                    {%endif%}
+
+
+                    <div class="date-action">{{event.date|date('Y-m-d h:m:s')}}</div>
+                    {%if (event.action=="claim")%}
+                        <label><b>Moneda reclamada por: </b></label>
+                        <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
+                        <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
+                            <div> <b>==> Ver perfil público</b> </div>
+                        </a>
+                    {%elseif (event.action=="review")%}
+                        <label><b>Moneda utilizada por: </b></label>
+                        <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
+                        <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
+                            <div> <b>==> Ver perfil público</b> </div>
+                        </a>
+                    {%elseif (event.action=="release")%}
+
+                        <label><b>Dueño actual: </b></label>
+                        <div class="font-weight-bold"> Moneda Libre, puedes RECOGERLA!</div>
+
+
+                    {%else%}
+
+                        <label><b>Dueño actual: </b></label>
+                        <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
+                        <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
+                            <div> <b>==> Ver perfil público</b> </div>
+                        </a>
+                    {%endif%}
+
+
+                </div>
+            </div>
+
+            <img id="qrcode" style="width: 102px" src="{{path('qrcode',{'code':qrcode})}}"></img> 
+
+        </div>
+    </div>
+
+    {%if not userSession%}
+
+        {{ include ('AppBundle:index:login.html.twig') }}    
+    {%endif%}
+{% endblock %}
+
+{%block afterCommonJs %}
+    {% if (event.action != "review") %}
+        {{ include ('AppBundle:promise:actions/actions.html.twig') }}
+    {%else%}
+        {% include ('AppBundle:promise:review.html.twig') with{'review':review} %}
+    {%endif%}
+
+
+{%endblock%}
+
+{%block js %}
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+{%endblock%}

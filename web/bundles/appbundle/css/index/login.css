@@ -1,0 +1,124 @@
+input{
+    max-width: 250px;
+    font-size: 1.1rem !important;
+}
+
+.login-left{
+    float: left;
+    width: 260px;   
+    margin: 10px 10px 0px 10px;
+}
+
+.login.alert{
+    display: none;
+}
+
+
+.div-login{
+    border-radius: 5px 30px 30px 5px;
+    border-width: 3px;
+    border-style:solid;
+    border-color:#337ab7;
+    padding:5px 5px 5px 5px;
+    float:left;
+    width: 250px;
+    margin: 0px 10px 10px 0px;
+}
+
+.label-email{
+    word-break: break-all;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.div-password, .div-register, .div-login-password, .label-email{
+    display: none;
+}
+.accountfbKit{
+    border-radius: 5px 30px 30px 5px;
+    border-width: 3px;
+    border-style:solid;
+    border-color:#337ab7;
+    padding:5px 5px 5px 5px;;
+    float:left;
+    width: 250px;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.network{
+    border-radius: 5px 30px 30px 5px;
+    border-width: 3px;
+    border-style:solid;
+    border-color:#337ab7;
+    padding:5px 5px 5px 5px;
+    float: left;
+    margin: 0px 10px 0px 0px;
+    width: 250px;
+}
+
+.network div{
+    display: inline-block;
+}
+.btn-lg{
+    margin-top: 6px;
+}
+
+#login-processing-image{
+    display:none;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 300px;
+    }
+    input{
+        font-size: 0.95rem !important;
+    }
+    .btn-lg{
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width: 530px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 250px;
+    }
+    input{
+        font-size: 0.9rem !important;
+    }
+}
+@media screen and (max-width: 490px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 220px;
+    }
+    input{
+        font-size: 0.85rem !important;
+    }
+}
+@media screen and (max-width: 350px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 200px;
+    }
+    input{
+        font-size: 0.8rem !important;
+    }
+}
+@media screen and (max-width: 310px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 190px;
+    }
+
+}
+@media screen and (max-width: 280px) {
+
+    .network,.div-login,.accountfbKit ,.login-left{
+        width: 170px;
+    }
+
+}

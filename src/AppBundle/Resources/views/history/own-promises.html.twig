@@ -1,0 +1,32 @@
+<button type="button" id="btn-own-promises"class="btn btn-primary btn-lg" >Monedas que tienes actualmente  <span id="count-own-promises"></span></button>
+<span>
+    <button id="btn-refresh-own-promises" class="btn btn-primary btn-sm"><span class="fa fa-refresh"></span></button>
+
+</span>
+<table id="table-own-promises" class="table table-striped table-own-promises">
+    <thead>
+        <tr>
+            <th>Moneda</th>
+    
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td>  
+                <button type="button" id="btn-more-own-promises" class="btn btn-primary btn-md ">Ver mas</button>
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert-danger"></span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+    var getMoreOwnPromisesUrl = "{{path('getMoreOwnPromises')}}";
+</script>

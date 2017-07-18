@@ -1,0 +1,85 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/history.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/titatoggle.min.css') }}" >
+{% endblock%}
+
+{% block body %}
+  
+
+
+    <div class="card" >
+        <div class = "card-header">
+            <h3><b>Mis monedas</b></h3> 
+            <label>Estado de tus monedas. Las monedas que creaste, las que tienes en este momento, los comentarios de quienes han utilizado tus monedas y tus comentarios en otras.</label>
+        </div>
+        <div class="card-block">
+
+            {%if userSession%}
+
+                <div >
+                    {{ include ('AppBundle:history:created-promises.html.twig') }}
+                </div>
+                <hr>
+                <div >
+                    {{ include ('AppBundle:history:received-reviews.html.twig') }}
+                </div>
+
+                <hr>
+                <div >
+                    {{ include ('AppBundle:history:own-promises.html.twig') }}
+                </div>
+
+                <hr>
+                <div>
+                    {{ include ('AppBundle:history:written-reviews.html.twig') }}
+                </div>
+
+            {%else%}
+                {{ include ('AppBundle:index:login.html.twig') }}
+            {%endif%}
+
+        </div>
+
+        <div class="card-footer">
+
+
+            <div >
+                <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                <span class="alert-danger alert-danger-history"></span>
+                <span class="lead alert-success"></span>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/jquery.dotdotdot.min.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/history/history.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/history/created-promises.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/history/own-promises.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/history/received-reviews.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/history/written-reviews.js')}}"></script>
+    <script src="{{ asset('bundles/appbundle/js/translate-actions.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/user/userinfo.js')}}"></script>
+   
+
+
+    {%if not userSession %}
+        <script>var session = false;</script>
+    {%else%}
+        <script>var session = true;</script>
+    {%endif%}
+
+    <script>
+        var getHistoryUrl = "{{ path('getHistory') }}";
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,6 @@
+<h1> Activa el usuario - <span>{{user.Email}}</span> </h1>
+<div><b>Haz click en el link para activar el usuario.</b></div>
+{% set code = user.code ~ '&' ~ user.Verification ~ '&' ~ user.email %}
+</br>
+<a href="{{ url('activateUser',{'code': code}) }}">{{ url('activateUser',{'code': code}) }}</a>
+

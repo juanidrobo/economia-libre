@@ -1,0 +1,62 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/appbundle/css/new.css') }}" >
+{% endblock %}
+
+{%block jsHead %}
+    {%if (userSession) %}
+        <script src='https://www.google.com/recaptcha/api.js' async="true"></script> 
+    {%endif%}
+{%endblock%}
+
+
+{% block body %}
+    <div class="card" >
+        <div class = "card-header">
+            <h3><b>Nueva moneda</b></h3> 
+            <label>
+                El valor de la moneda es una promesa. Cumple con lo que prometes.
+            </label>
+        </div>
+        <div class="card-block">
+            {%if not (userSession) %}
+                <div class="alert alert-danger lead">Cada moneda tiene un creador o responsable.</div>
+                {{ include ('AppBundle:index:login.html.twig') }}
+
+            {%endif%}
+            {%if (userSession)%}
+                <div >
+                    <label class="text-primary lead "><b>Promesa:</b></label>
+                    <p class="form-group"> <textarea {% if not (userSession) %} readonly {%endif%} class="form-control" rows="7" placeholder="{% if (promise) %}Ejemplo: {{promise.description}} {% endif %}" {%if userSession %} autofocus="" {%endif%}></textarea></p>
+
+                    <div class="g-recaptcha" data-sitekey="{{recaptcha_key}}"></div> 
+                </div>
+            {%endif%}
+        </div>
+
+        <div class="card-footer">
+            {%if (userSession)%}
+                <div >
+                    <button type="button" class="create btn btn-primary btn-lg {%if not (userSession)%}disabled{%endif%}">Continuar</button>
+                    <img class="processing-image" src="{{asset('bundles/appbundle/img/processing-image.gif')}}">
+                    <span class="alert-danger"></span>
+                    <span class="lead alert-success"></span>
+                </div>
+            {%endif%}
+
+        </div>
+    </div>
+{% endblock %}
+
+{%block js %}
+    <script>
+                        var createPromiseUrl = "{{ path('createPromise') }}";
+                        var promiseUrl = "{{ path('promise',{'code':'promiseId'}) }}";
+    </script>
+    <script src="{{ asset('bundles/appbundle/js/promise/new.js')}}"></script>
+
+    <script src="{{ asset('bundles/appbundle/js/md5.js')}}"></script>
+{%endblock%}
+
+

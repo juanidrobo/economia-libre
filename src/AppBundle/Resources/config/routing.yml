@@ -1,0 +1,156 @@
+test:
+    path: /test
+    defaults: {_controller : AppBundle:Index:test}   
+home:
+    path:     /
+    defaults: { _controller: AppBundle:Index:index }
+about:
+    path:     /que-es
+    defaults: { _controller: AppBundle:Index:about }
+newQuestion:
+    path:     /newquestion
+    defaults: { _controller: AppBundle:Index:newQuestion }    
+help:
+    path:     /ayudar
+    defaults: { _controller: AppBundle:Index:help }    
+newPromise:
+    path: /new
+    defaults: { _controller: AppBundle:Promise:new}
+createPromise:
+    path: /create
+    defaults: { _controller: AppBundle:Promise:create}
+promiseCreated:
+    path: /created
+    defaults: { _controller: AppBundle:Promise:created }
+activatePromise:
+    path: /activate/{promiseCode}&{eventCode}
+    defaults: { _controller: AppBundle:Promise:activate }    
+qrcode:
+    path: /qrcode/{code}
+    defaults: { _controller: AppBundle:Promise:qrCode }   
+createSecKey:
+    path: /createseckey
+    defaults: { _controller: AppBundle:User:createSecKey }    
+promise:
+    path: /promise/{code}
+    defaults: { _controller: AppBundle:Promise:promise }    
+releasePromise:
+    path: /release
+    defaults: { _controller: AppBundle:Promise:release }
+validateUser:
+    path: /validateuser
+    defaults: { _controller: AppBundle:User:validateUser }
+grabPromise: 
+    path: /grabPromise
+    defaults: { _controller: AppBundle:Promise:grab}
+grabPromiseAnonymous: 
+    path: /grabPromiseAnonymous
+    defaults: { _controller: AppBundle:Promise:grabAnonymous}
+newPublicKey: 
+    path: /newPublicKey
+    defaults: { _controller: AppBundle:Promise:newPublicKey}
+validatePublicKey: 
+    path: /validatePublicKey
+    defaults: { _controller: AppBundle:Promise:validatePublicKey}
+transfer: 
+    path: /transfer
+    defaults: { _controller: AppBundle:Promise:transfer}
+claim: 
+    path: /claim
+    defaults: { _controller: AppBundle:Promise:claim}
+review: 
+    path: /review
+    defaults: { _controller: AppBundle:Promise:review}
+register: 
+    path: /register
+    defaults: { _controller: AppBundle:User:register}  
+activateUser: 
+    path: /activateUser/{code}
+    defaults: { _controller: AppBundle:User:activateUser}      
+login: 
+    path: /login
+    defaults: { _controller: AppBundle:User:login}    
+logout: 
+    path: /logout
+    defaults: { _controller: AppBundle:User:logout}    
+recoveryKey: 
+    path: /recoverykey
+    defaults: { _controller: AppBundle:User:recoveryKey}
+notifyNewKey: 
+    path: /notifynewkey
+    defaults: { _controller: AppBundle:User:notifyNewKey}
+newKey: 
+    path: /newkey/{code}
+    defaults: { _controller: AppBundle:User:newKey}
+changeKey: 
+    path: /changekey
+    defaults: {_controller : AppBundle:User:changeKey}
+editUser: 
+    path: /edituser
+    defaults: {_controller : AppBundle:User:editUser}
+fbLogin: 
+    path: /fblogin
+    defaults: {_controller : AppBundle:User:fbLogin}
+gLogin: 
+    path: /glogin
+    defaults: {_controller : AppBundle:User:gLogin}
+twLogin:
+    path: /twlogin
+    defaults: {_controller: AppBundle:User:twLogin}
+twLoginCallback:
+    path: /twlogincallback
+    defaults: {_controller: AppBundle:User:twLoginCallback}
+getInfoFbKit: 
+    path: /getinfofbkit
+    defaults: {_controller : AppBundle:User:getInfoFbKit}
+accountFbKitLogin: 
+    path: /accountfbkitlogin
+    defaults: {_controller : AppBundle:User:accountFbKitLogin}
+myProfile: 
+    path: /info
+    defaults: {_controller : AppBundle:User:userInfo}
+myHistory: 
+    path: /history
+    defaults: {_controller : AppBundle:History:history}
+getHistory: 
+    path: /gethistory
+    defaults: {_controller : AppBundle:History:getHistory}
+getMoreCreatedPromises: 
+    path: /getmorecreatedpromises
+    defaults: {_controller : AppBundle:History:getMoreCreatedPromises}
+getMoreOwnPromises: 
+    path: /getmoreownpromises
+    defaults: {_controller : AppBundle:History:getMoreOwnPromises}
+getMoreReceivedReviews:
+    path: /getmorereceivedreviews
+    defaults: {_controller : AppBundle:History:getMoreReceivedReviews}
+getMoreWrittenReviews:
+    path: /getmorewrittenreviews
+    defaults: {_controller : AppBundle:History:getMoreWrittenReviews}
+togglePromise: 
+    path: /toggle
+    defaults: { _controller: AppBundle:History:toggle}
+profile: 
+    path: /profile
+    defaults: {_controller : AppBundle:Profile:profile}
+getProfile: 
+    path: /getprofile
+    defaults: {_controller : AppBundle:Profile:getProfile}
+getMoreProfileCreatedPromises: 
+    path: /profile/getmorecreatedpromises
+    defaults: {_controller : AppBundle:Profile:getMoreCreatedPromises} 
+getMoreProfileReceivedReviews:
+    path: profile/getmorereceivedreviews
+    defaults: {_controller : AppBundle:Profile:getMoreReceivedReviews}
+getMoreProfileWrittenReviews:
+    path: /profile/getmorewrittenreviews
+    defaults: {_controller : AppBundle:Profile:getMoreWrittenReviews}
+
+
+    
+    
+
+
+
+
+
