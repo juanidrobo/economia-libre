@@ -1,3 +1,9 @@
+$("input").click(function(){
+    if ($(this).val()==""){
+     $(this).next().find(".btn-edit").trigger("click");
+    }
+});
+
 $("#btn-user-info").click(function () {
     $("#btn-user-info").toggle();
     $(".div-edit-user").toggle("slow");

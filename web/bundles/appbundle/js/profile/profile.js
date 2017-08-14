@@ -131,12 +131,12 @@ function profile(user) {
                 $(".login").hide("");
                 $("#div-contact-info").show("");
                 $(".user-name").text(json.displayName);
-                
-                if (json.userEmail || json.userPhone || json.userNetworks.length>0){
-                    $(".verified").css("display","inline-block");
+
+                if (json.userEmail || json.userPhone || json.userNetworks.length > 0) {
+                    $(".verified").css("display", "inline-block");
                     $(".not-verified").hide();
-                }else{
-                    $(".not-verified").css("display","inline-block");
+                } else {
+                    $(".not-verified").css("display", "inline-block");
                     $(".verified").hide();
                 }
                 if (json.userEmail) {
@@ -175,13 +175,20 @@ function profile(user) {
 
                     if (json.userNetworks[i]["userNameVerified"]) {
 
-                        url = json.userNetworks[i]["displayUrl"] + "/" + json.userNetworks[i]["userName"];
+// workaround, there are some google profiles with "+"
+                        var networkName = json.userNetworks[i]['name'];
+                        var networkUserName = json.userNetworks[i]['userName'];
+                        if (networkName == "g" && !(networkUserName.includes("+"))) {
+                            url = networkUserName;
+                        } else {
+                            url = json.userNetworks[i]["displayUrl"] + "/" + networkUserName;
+                        }
+
                         html = "<a style='margin-left:5px;' target='_blank' href='" + url + "' class='lead info text-primary user-network'>" + url + "</a>";
                         $(".info-networks").append(html);
 
                     }
                     $(".info-networks").append("</br>");
-
                 }
 
 

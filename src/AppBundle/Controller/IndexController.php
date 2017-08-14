@@ -12,6 +12,7 @@ class IndexController extends Controller {
 
     public function testAction(Request $request) {
 
+       
         return $this->render('AppBundle:index:test.html.twig');
    
      

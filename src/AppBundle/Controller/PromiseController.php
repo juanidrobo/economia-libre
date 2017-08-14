@@ -162,7 +162,7 @@ class PromiseController extends Controller {
                     $em->flush();
                     return $this->render('AppBundle:promise:activated.html.twig', $renderArray);
                 } else {
-                    $session->set("userSession",null);
+                    $session->set("userSession", null);
                     return $this->render('AppBundle:promise:activate-missing-key.html.twig', $renderArray);
                 }
             } else { //TO REMOVE?? 
@@ -189,41 +189,48 @@ class PromiseController extends Controller {
         $renderArray['userSession'] = $userSession;
         $renderArray['csrf'] = uniqid("", true);
         $renderArray['message'] = $message;
+        $renderArray['verification'] = 0;
 
         $review = null;
+
+
+
         if (strpos($code, '&')) {
             $keywords = preg_split("/[&]/", $code);
             $promiseCode = $keywords[0];
-            $eventCode = $keywords[1];
+            $verification = $keywords[1];
+
+            //the verification code included in the url
+            $renderArray['verification'] = $verification;
+
             $promise = $this->getDoctrine()->getRepository('AppBundle:Promise')->findOneBy(array('code' => $promiseCode, 'active' => true));
             if ($promise === null) {
                 return $this->render('AppBundle:promise:promise-error.html.twig', $renderArray);
             }
             $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOneBy(array("promise" => $promise->getCode()), array("date" => "DESC"));
-            if ($event) {
-                if ($event->getAction() === "anonymousgrab") {
-                    if ($event->getCode() !== $eventCode) {
-                        $renderArray['promise'] = $promise;
-                        return $this->render('AppBundle:promise:promise-error-anonymous.html.twig', $renderArray);
-                    }
-                } else {
-                    return $this->render('AppBundle:promise:promise-error.html.twig', $renderArray);
-                }
+
+            if ($promise->getVerification() === $verification) {
+                $renderArray['transfer'] = true;
             } else {
-                return $this->render('AppBundle:promise:promise-error.html.twig', $renderArray);
+                return $this->redirectToRoute("promise", array("code" => $promiseCode));
             }
         } else {
-
             $promise = $this->getDoctrine()->getRepository('AppBundle:Promise')->findOneBy(array('code' => $code, 'active' => true));
+
             if ($promise === null) {
                 return $this->render('AppBundle:promise:promise-error.html.twig', $renderArray);
             }
             $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOneBy(array("promise" => $promise->getCode()), array("date" => "DESC"));
+
+
+            if ($promise->getVerification() === null) {
+                $promise->setVerification(uniqid("", true));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($promise);
+                $em->flush();
+            }
             if ($event) {
-                if ($event->getAction() === "anonymousgrab") {
-                    $renderArray['promise'] = $promise;
-                    return $this->render('AppBundle:promise:promise-error-anonymous.html.twig', $renderArray);
-                }
+
                 if ($event->getAction() === "review") {
                     $review = $this->getDoctrine()->getRepository('AppBundle:Review')->findOneBy(array('promise' => $promise->getCode()));
                 }
@@ -241,6 +248,15 @@ class PromiseController extends Controller {
         include_once $this->get('kernel')->getRootDir() . '/../src/AppBundle/Lib/phpqrcode/qrlib.php';
 
         $url = $this->generateUrl('promise', array('code' => $code), UrlGeneratorInterface::ABSOLUTE_URL);
+        $response->setContent(\QRcode::png($url));
+        return $response;
+    }
+
+    public function qrCodeTransferAction($code, $verification) {
+        $response = new Response();
+        include_once $this->get('kernel')->getRootDir() . '/../src/AppBundle/Lib/phpqrcode/qrlib.php';
+        $code = $code + "&" + $verification;
+        $url = $this->generateUrl('promiseTransferLink', array('code' => $code), UrlGeneratorInterface::ABSOLUTE_URL);
         $response->setContent(\QRcode::png($url));
         return $response;
     }
@@ -343,24 +359,27 @@ class PromiseController extends Controller {
 
             $promiseCode = $promiseArray['promise'];
             $publicKey = $promiseArray['pubkey'];
+            $verification = $promiseArray['verification'];
 
             $event = $this->getDoctrine()->getRepository("AppBundle:Event")->findOneBy(array("promise" => $promiseCode), array("date" => "DESC"));
             $promise = $this->getDoctrine()->getRepository('AppBundle:Promise')->findOneBy(array("code" => $promiseCode));
             $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userSession->getCode());
 
 
-            if ($event->getAction() === "release" || $event->getAction() === "anonymousgrab") {
+            if ($event->getAction() === "release" || $promise->getVerification() === $verification) {
 
                 $em = $this->getDoctrine()->getManager();
                 $event = new Event();
                 $event->setPromise($promise);
                 $event->setAction("grab");
                 $event->setReceiver($user);
-                $em->persist($event);
-                $em->flush();
-            }
+                $promise->setVerification(uniqid("", true));
 
-            if ($event->getAction() === "publickey") {
+                $em->persist($event);
+                $em->persist($promise);
+
+                $em->flush();
+            } else if ($event->getAction() === "publickey") {
                 if ($promise->getPubKey() === $publicKey) {
                     $em = $this->getDoctrine()->getManager();
                     $event = new Event();
@@ -374,6 +393,10 @@ class PromiseController extends Controller {
                     $response->setContent('{"error": "La llave publica es incorrecta."}');
                     return $response;
                 }
+            } else {
+                $response->setStatusCode(300);
+                $response->setContent('{"error": "La moneda no puede ser recogida."}');
+                return $response;
             }
 
             if ($user->getName()) {
@@ -627,6 +650,7 @@ class PromiseController extends Controller {
                         $event->setOwner($owner);
                         $event->setReceiver($promise->getResponsible());
                         $promise->setVisible(true);
+                        $promise->setVerification(uniqid("", true));
                         $em->persist($event);
                         $em->persist($promise);
                         $em->flush();
@@ -768,7 +792,11 @@ class PromiseController extends Controller {
                         $event->setOwner($owner);
                         $event->setReceiver($receiver);
                         $event->setAction("review");
+
+
+
                         $em->persist($event);
+
                         $em->flush();
 
                         $mailer = $this->get('app.mailer');

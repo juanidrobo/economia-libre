@@ -10,7 +10,7 @@ $(".close").click(function () {
     $(this).parent().hide("slow");
 
     if ($(this).parent().parent().find(".card:visible").length === 1) { //size===1 because the hide("slow") takes time to complete
-     
+
         $(".btn-actions").show("slow");
     }
 });
@@ -40,9 +40,13 @@ $(".grab").click(function () {
         $(".panel-grab-promise").show("slow");
         $(".panel-grab-promise-anonymous").show("slow");
 
+        $(".btn-grab").show();
         $(".panel-grab-promise .alert-danger").text("");
+        $(".panel-grab-promise .alert-danger").hide();
         $(".panel-grab-promise .alert-info").text("");
+        $(".panel-grab-promise .alert-info").hide();
         $(".panel-grab-promise .alert-success").text("");
+        $(".panel-grab-promise .alert-success").hide();
         $(".panel-grab-promise .pubkey").val("");
         $(".panel-grab-promise .pubkey").focus();
         $(".panel-grab-promise-after-pubkey").hide();
@@ -53,7 +57,7 @@ $(".grab").click(function () {
         $(".panel-grab-promise .email").val("");
         $(".panel-grab-promise .email-text").hide();
         $("body").animate({scrollTop: 99999}, 'slow');
-     
+
     }
 
 });
@@ -61,13 +65,13 @@ $(".grab").click(function () {
 $(".transfer").click(function () {
     if (!$(this).hasClass("disabled")) {
         $(".btn-actions").hide("slow");
-        $(".panel-transfer").show("slow");
-        $(".panel-transfer").find(".email-to-transfer").val("");
-        $(".panel-transfer").find(".email-to-transfer").parent().removeClass("has-warning");
-        $(".panel-transfer").find(".email-to-transfer").focus();
-        $(".panel-transfer").find(".alert-danger").html("");
+        $(".div-transfer").show("slow");
+        $(".div-transfer").find(".email-to-transfer").val("");
+        $(".div-transfer").find(".email-to-transfer").parent().removeClass("has-warning");
+        $(".div-transfer").find(".email-to-transfer").focus();
+        $(".div-transfer").find(".alert-danger").html("");
 
-        $("body").animate({scrollTop: 99999}, 'slow');
+        $("body").animate({scrollTop: $(".card-footer").offset().top - 50}, 'slow');
     }
 
 });

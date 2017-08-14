@@ -9,14 +9,14 @@
 {%block body %}
 
     <input type="hidden" id="promise-code" value="{{promise.code}}"></input>
+    <input type="hidden" id="promise-verification" value="{{verification}}"></input>
     {% set qrcode=promise.code %}
     {% if (event) %}
-        {% if event.action == "anonymousgrab" %}
-            {% set qrcode = qrcode ~ "&" ~ event.code%}
-            <span class="lead alert-danger">Esta moneda fue recogida anonimámente. Guarda la dirección para poder acceder y compartirla!</span>
-        {% endif %}
+
     {% endif %}
-    <div class="card  " >
+
+
+    <div class="card" >
         <div class = "card-header">
             {%if (message)%}
                 <b>
@@ -26,9 +26,9 @@
                 </b>
             {%endif%}
             <div class="date-action">{{promise.getDate()|date("Y-m-d H:m:s")}}</div>
-            <h3>Moneda respaldada por <b>{{promise.responsible.getDisplayName()}}</b>
+            <label class="text-primary responsible" >Moneda respaldada por <b>{{promise.responsible.getDisplayName()}}</b>
 
-            </h3>
+            </label>
             <a href="{{path('profile')}}?info={{promise.responsible.getCode}}" target="_blank">
                 <div> <b>==> Ver perfil público</b> </div>
             </a>
@@ -55,28 +55,34 @@
                     {%endif%}
 
 
-                    <div class="date-action">{{event.date|date('Y-m-d h:m:s')}}</div>
+                    <div class="date-action">{{event.date|date('Y-m-d H:m:s')}}</div>
                     {%if (event.action=="claim")%}
-                        <label><b>Moneda reclamada por: </b></label>
+                        <span>Moneda reclamada por:</span>
                         <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
                         <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
                             <div> <b>==> Ver perfil público</b> </div>
                         </a>
                     {%elseif (event.action=="review")%}
-                        <label><b>Moneda utilizada por: </b></label>
+                        <span>Moneda utilizada por: </span>
                         <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
                         <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
                             <div> <b>==> Ver perfil público</b> </div>
                         </a>
                     {%elseif (event.action=="release")%}
 
-                        <label><b>Dueño actual: </b></label>
+                        <span>Dueño actual:</span>
                         <div class="font-weight-bold"> Moneda Libre, puedes RECOGERLA!</div>
 
+                    {%elseif (event.action=="transfer")%}
+
+                        <span>Moneda transferida a:</span>
+                        <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>   <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
+                            <div> <b>==> Ver perfil público</b> </div>
+                        </a>
 
                     {%else%}
 
-                        <label><b>Dueño actual: </b></label>
+                        <span>Dueño actual:</span>
                         <div class="font-weight-bold">{%if (owner)%} {{owner.getDisplayName()}} {%else%} Anónimo {%endif%}</div>
                         <a href="{{path('profile')}}?info={{owner.getCode}}" target="_blank">
                             <div> <b>==> Ver perfil público</b> </div>
@@ -87,23 +93,23 @@
                 </div>
             </div>
 
-            <img id="qrcode" style="width: 102px" src="{{path('qrcode',{'code':qrcode})}}"></img> 
+            {%if not userSession%}
+                {{ include ('AppBundle:index:login.html.twig') }}    
+            {%endif%}
+        </div>
+    {%endblock%}
+    {%block afterCommonJs %}  
+        <div class="card-footer">
+
+            {% if (event.action != "review") %}
+                {{ include ('AppBundle:promise:actions/actions.html.twig') }}
+            {%else%}
+                {% include ('AppBundle:promise:review.html.twig') with{'review':review} %}   
+            {%endif%}
 
         </div>
+
     </div>
-
-    {%if not userSession%}
-
-        {{ include ('AppBundle:index:login.html.twig') }}    
-    {%endif%}
-{% endblock %}
-
-{%block afterCommonJs %}
-    {% if (event.action != "review") %}
-        {{ include ('AppBundle:promise:actions/actions.html.twig') }}
-    {%else%}
-        {% include ('AppBundle:promise:review.html.twig') with{'review':review} %}
-    {%endif%}
 
 
 {%endblock%}

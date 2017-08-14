@@ -1,6 +1,6 @@
 body{
     padding-top: 5em;
-  
+
 }
 main{
     max-width: 700px;
@@ -12,6 +12,9 @@ input{
     width: 100% !important;
 }
 
+.btn:hover{
+    cursor: pointer; 
+}
 .card{
     width: 100%;
 }
@@ -24,17 +27,22 @@ input{
 .navbar-toggler{
     z-index: 9999;
 }
-#navbarsMenu{
-    width: 650px;
+.navbar-toggler:hover{
+    cursor:pointer;
+}
+.navbar-brand{
+    width: 200px;
 }
 #navbarsUser{
     margin-top: 7px;
-    margin-left: 730px;
+    margin-left: 200px;
 }
 #navbarsUser ul{
     margin-right: 7px;
     float: right;
 }
+
+
 #user2{
     display: none;
 }
@@ -42,30 +50,82 @@ input{
     display: none;
 }
 
+#newPromise2{
+    display: none;
+}
+#myHistory2{
+    display: none;
+}
+#profile2{
+    display:none;
+}
+#whatIs2{
+    display:none;
+}
+
 
 @media (max-width: 991px){
 
-    #navbarsUser{
-        margin-left: 160px;
-    }
+
     #navbarsUser ul{
         margin-right: 84px;;
     }
-    #logout1{
+    #logout2{
         display:none;
     }
-    #logout2{
+    #logout1{
         display: block;
     }
-}
-@media (max-width: 530px){
-
     #user1{
         display:none;
     }
     #user2{
         display: block;
     }
+    #newPromise2{
+        display: block;
+    }
+    #myHistory2{
+        display: block;
+    }
+    #profile2{
+        display:block;
+    }
+    #whatIs2{
+        display:block;
+    }
+
+}
+
+@media (max-width: 610px){
+    #profile2{
+        display:none;
+    }
+    #whatIs2{
+        display:none;
+    }
+}
+
+@media (max-width: 590px){
+    #myHistory2{
+        display: none;
+    }
+} 
+
+@media (max-width: 580px){
+    #newPromise2{
+        display: none;
+    }
+}
+
+@media (max-width: 530px){
+    #user1{
+        display:block;
+    }
+    #user2{
+        display: none;
+    }
+
 }
 
 @media (max-width: 368px){

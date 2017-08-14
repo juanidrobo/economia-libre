@@ -13,10 +13,15 @@ textarea{
 #div-info{
     float:left;
     min-width: 200px;
+    margin-bottom: 1rem;
 }
 .date-action{
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 
+}
+
+.responsible{
+    font-size: 1.5rem;
 }
 @media screen and (max-width: 400px) {
 

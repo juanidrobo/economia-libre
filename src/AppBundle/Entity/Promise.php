@@ -34,11 +34,11 @@ class Promise {
      */
     private $active;
 
-      /**
+    /**
      * @ORM\Column(type="boolean", name="Visible")
      */
     private $visible;
-    
+
     /**
      * @ORM\Column(type="string", length=50, name="Pubkey", nullable=true)
      */
@@ -48,6 +48,11 @@ class Promise {
      * @ORM\Column(type="datetime", name="Date")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="guid", name="Verification", nullable=true)
+     */
+    private $verification;
 
     public function getCode() {
         return $this->code;
@@ -81,7 +86,6 @@ class Promise {
         $this->active = $active;
     }
 
-    
     public function getVisible() {
         return $this->visible;
     }
@@ -89,7 +93,7 @@ class Promise {
     public function setVisible($visible) {
         $this->visible = $visible;
     }
-    
+
     public function getPubKey() {
         return $this->pubkey;
     }
@@ -104,6 +108,14 @@ class Promise {
 
     public function setDate($date) {
         $this->date = $date;
+    }
+
+    public function getVerification() {
+        return $this->verification;
+    }
+
+    public function setVerification($verification) {
+        $this->verification = $verification;
     }
 
     /**

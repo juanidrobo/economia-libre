@@ -1,155 +1,151 @@
+{% if (event) %}
 
-<div class="card div-actions">
-    <!--<div class="panel-heading close close-actions">X</div> -->
-
-    <div class="card-header">
-        {%if (userSession) %}
-            {%if (userSession.name) %}
-                {%set userName = userSession.name %}
-            {%elseif (userSession.email)%}
-                {% set userName = userSession.email %}
-            {%elseif (userSession.phone)%}
-                {% set userName = userSession.phone %}
-            {%endif%}
-            <h3 class="text-primary">Acciones disponibles para  <span id="user" class="text-primary"><b>{{userName}}</b></span> en esta moneda.</h3>
-                    {%else%}
-
-        {%endif%}
-    </div>
-    <div class="card-block">
-
-        {% if (event) %}
-            {% if (event.action=="transfer") %}
-                <div class="alert alert-danger">
-                    Esta moneda fue transferida, esperando la confirmación del receptor.
-                    {%if (userSession and event.receiver.code == userSession.code) %}
-                        <div>
-                            <a href="{{path ('activatePromise',{'promiseCode':promise.code,'eventCode':event.code})}}">Confirmar transferencia</a>
-                        </div>
-                    {%endif%}
-                </div>
-            {%endif%}
-            {% if (event.action=="pending") %}
-                <div><label>Esta moneda fue recogida por un nuevo usuario, esperando la confirmación.</label></div>
-            {%endif%}
-            {% if (event.action=="claim") %}
+    {% if (event.action=="transfer") %}
+        <div style="display:block" class="alert alert-danger">
+            <label>
+                Esta moneda fue transferida, esperando la confirmación del receptor.
+            </label>
+            {%if (userSession and event.receiver.code == userSession.code) %}
                 <div>
-                    <label class='text-primary lead'><b>Esta moneda fue reclamada, esperando los comentarios de quien la disfrutó.</b></label>
+                    <a class="btn btn-lg btn-primary" href="{{path ('activatePromise',{'promiseCode':promise.code,'eventCode':event.code})}}">Confirmar transferencia</a>
                 </div>
+
+            {%endif%}
+        </div>
+    {%endif%}
+    {% if (event.action=="pending") %}
+        <div><label>Esta moneda fue recogida por un nuevo usuario, esperando la confirmación.</label></div>
+    {%endif%}
+    {% if (event.action=="claim") %}
+        <div>
+            <label class='text-primary lead'><b>Esta moneda fue reclamada, esperando los comentarios de quien la disfrutó.</b></label>
+        </div>
+        {% set status = "disabled" %}
+        {% if (userSession)  %}
+            {%if (userSession.code == event.owner.code)%}
+                {% set status = "enabled" %}
+            {%endif%}
+        {%endif%} 
+        <div class="lead">
+            <button class="btn-primary btn btn-lg review {{status}}" >Comentar sobre esta moneda ...</button>
+        </div>
+    {%endif%}
+{%endif%}
+
+{%if (userSession)%}
+    <div class ="btn-actions">
+        {%set responsible = (promise.responsible.code == userSession.code)%}
+        {%if event.action!="anonymousgrab"%}
+            {%set owner = (event.action== "release" and event.owner.code == userSession.code) or (event.receiver and event.receiver.code == userSession.code)%}
+        {%else%}
+            {%set owner=false%}
+        {%endif%}
+
+
+        {%if  (event.action != "claim") %}  
+
+            <!-- Release, Transfer -->
+            {%if owner %}
+                {% if  (event.action == "new") or (event.action == "grab") or (event.action=="publickey")  %} 
+                    {% set status = "enabled" %}
+                {% else %} 
+                    {% set status = "disabled" %}
+                {%endif%}
+            {%else%}
                 {% set status = "disabled" %}
-                {% if (userSession)  %}
-                    {%if (userSession.code == event.owner.code)%}
-                        {% set status = "enabled" %}
-                    {%endif%}
-                {%endif%} 
-                <div class="lead">
-                    <button class="btn-primary btn btn-lg review {{status}}" >Comentar sobre esta moneda</button>
-                </div>
-            {%endif%}
-        {%endif%}
+            {%endif%}    
 
-        {%if (userSession)%}
-            <div class ="btn-actions">
-                {%set responsible = (promise.responsible.code == userSession.code)%}
-                {%if event.action!="anonymousgrab"%}
-                    {%set owner = (event.action== "release" and event.owner.code == userSession.code) or (event.receiver and event.receiver.code == userSession.code)%}
+            {%if status=="enabled"%}
+                <button class="btn-primary btn btn-lg transfer {{status}} "> Transferir moneda ...</button>
+            {%endif%}
+            <!-- Grab -->
+            {%if transfer is defined and transfer %}
+                {%if not owner%}
+                    <button class="btn-primary btn btn-lg grab ">Recoger moneda ...</button>
+                {%endif%}
+
+            {%else%}
+
+                {% if (( event.action != "release") and (event.action != "publickey"))  %}
+                    {% set status = "disabled" %}
                 {%else%}
-                    {%set owner=false%}
-                {%endif%}
-                {%if  (event.action != "claim") %}  
-
-                    <!-- Release, Transfer -->
-                    {%if owner %}
-                        {% if  (event.action == "new") or (event.action == "grab") or (event.action=="publickey")  %} 
-                            {% set status = "enabled" %}
-                        {% else %} 
-                            {% set status = "disabled" %}
-                        {%endif%}
-                    {%else%}
-                        {% set status = "disabled" %}
-                    {%endif%}    
-                    <button class="btn-primary btn btn-lg release {{status}} ">Liberar</button>
-                    <button class="btn-primary btn btn-lg transfer {{status}} "> Transferir</button>
-
-                    <!-- Grab -->
-                    {% if (( event.action != "release") and (event.action != "publickey") and (event.action != "anonymousgrab") )  %}
-                        {% set status = "disabled" %}
-                    {%else%}
-                        {% set status = "enabled" %}
-                    {%endif%} 
+                    {% set status = "enabled" %}
+                {%endif%} 
+                {%if status=="enabled"%}
                     <button class="btn-primary btn btn-lg grab {{status}}">Recoger moneda</button>
-
-
-                    <!-- Claim -->
-                    {% if (event.receiver and event.receiver.code == userSession.code) %}
-                        {%if not responsible%}
-                            {% if ( event.action != "grab") and (event.action != "publickey")  %} 
-                                {% set statusClaim = "disabled" %}
-                            {%else%}
-                                {% set statusClaim = "enabled" %}
-                            {% endif %}
-                        {%else%}
-                            {% set statusClaim = "disabled" %}
-                        {% endif %}
-
-                    {%else%}
-                        {% set statusClaim = "disabled" %}
-                    {% endif %}
-                    <button class="btn-primary btn btn-lg claim {{statusClaim}}" >Reclamar moneda</button>
-
-                    <!--
-                    {%if owner %}
-                        {% set status = "enabled" %}
-                    {% else %} 
-                        {% set status = "disabled" %}
-                    {%endif%}
-    
-                   
-                    <button class="btn-primary btn btn-md print {{status}}" >Imprimir moneda</button>
-                    -->
                 {%endif%}
-            </div>
-
-            {%if (event.action != "claim") %}   
-                <div class="action">
-
-                    {{ include ('AppBundle:promise:actions/action-release.html.twig') }}
-                    {{ include ('AppBundle:promise:actions/action-pubkey.html.twig') }}
-                </div>
-
-                <div class="action">
-                    {{ include ('AppBundle:promise:actions/action-transfer.html.twig') }}
-                </div>
-
-
-                <div class="action">
-                    {% if (event) %}
-                        {% if ((event.action == "release") or (event.action == "anonymousgrab")) %}
-                            {{ include ('AppBundle:promise:actions/action-grab.html.twig') }}
-                            <!-- For now, to better understanding of the Free Economy, We dont include the action-grab-anonymous.html.twig -->
-                        {% elseif (event.action == "publickey") %}
-                            {{ include ('AppBundle:promise:actions/action-grab-pubkey.html.twig') }}
-                        {% endif %}
-                    {% endif %}
-                </div>
-
-                {%if (statusClaim == "enabled") %}
-                    <div class="action">
-                        {{ include ('AppBundle:promise:actions/action-claim.html.twig') }}
-                    </div>
-                {%endif%}
-
-            {% else %}
-                <div class="action">
-                    {{ include ('AppBundle:promise:actions/action-review.html.twig') }}
-                </div>
             {%endif%}
 
-        {%endif%}
+            <!-- Claim -->
+            {% if (event.receiver and event.receiver.code == userSession.code) %}
+                {%if not responsible%}
+                    {% if ( event.action != "grab") and (event.action != "publickey")  %} 
+                        {% set statusClaim = "disabled" %}
+                    {%else%}
+                        {% set statusClaim = "enabled" %}
+                    {% endif %}
+                {%else%}
+                    {% set statusClaim = "disabled" %}
+                {% endif %}
 
+            {%else%}
+                {% set statusClaim = "disabled" %}
+            {% endif %}
+
+            {%if statusClaim=="enabled" %}
+                <button class="btn-primary btn btn-lg claim {{statusClaim}}" >Reclamar moneda ...</button>
+            {%endif%}
+            <!--
+            {%if owner %}
+                {% set status = "enabled" %}
+            {% else %} 
+                {% set status = "disabled" %}
+            {%endif%}
+
+           
+            <button class="btn-primary btn btn-md print {{status}}" >Imprimir moneda</button>
+            -->
+        {%endif%}
     </div>
 
-</div>
+    {%if (event.action != "claim") %}   
+        <div class="action">
+
+            {{ include ('AppBundle:promise:actions/action-release.html.twig') }}
+            {{ include ('AppBundle:promise:actions/action-pubkey.html.twig') }}
+        </div>
+
+        <div class="action">
+            {{ include ('AppBundle:promise:actions/action-transfer.html.twig') }}
+            {{ include ('AppBundle:promise:actions/action-transfer-url.html.twig') }}
+        </div>
+
+
+        <div class="action">
+            {% if (event) %}
+                {% if ((event.action == "release") or (transfer is defined and transfer)) %}
+                    {{ include ('AppBundle:promise:actions/action-grab.html.twig') }}
+                    <!-- For now, to better understanding of the Free Economy, We dont include the action-grab-anonymous.html.twig -->
+                {% elseif (event.action == "publickey") %}
+                    {{ include ('AppBundle:promise:actions/action-grab-pubkey.html.twig') }}
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {%if (statusClaim == "enabled") %}
+            <div class="action">
+                {{ include ('AppBundle:promise:actions/action-claim.html.twig') }}
+            </div>
+        {%endif%}
+
+    {% else %}
+        <div class="action">
+            {{ include ('AppBundle:promise:actions/action-review.html.twig') }}
+        </div>
+    {%endif%}
+
+{%endif%}
+
 <script src="{{ asset('bundles/appbundle/js/actions/actions.js')}}"></script>
 
 <script>

@@ -10,61 +10,82 @@
 
     <a class="navbar-brand" href="{{path('home')}}">Economía libre <small><small>beta</small></small></a>
 
+ 
+    <div id="navbarsUser" class="navbar-toggleable  fixed-top" >
+        <ul class="navbar-nav" >
+            {%if  (userSession) %}
+                <li id="user2" class="nav-item ">
+                    <a class="nav-link" href="{{path('myProfile')}}"><b>{{userSession.getDisplayName()}}</b></a>
+                </li>
 
+
+                <li id="newPromise2" class="nav-item ">
+                    <a class="nav-link" href="{{path('newPromise')}}"> <i class="fa fa-plus" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Nueva moneda"></i>  </a>
+                </li>
+
+                <li id="myHistory2" class="nav-item ">
+                    <a class="nav-link" href="{{path('myHistory')}}"><i class="fa fa-money" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Mis monedas"></i>  </a>
+                </li>
+
+                <li id="profile2" class="nav-item" >
+                    <a class="nav-link " href="{{path('profile')}}"><i class="fa fa-user-o" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Perfil publico"></i></a>
+                </li>
+
+
+                <li id="whatIs2" class="nav-item">
+                    <a class="nav-link" href="{{path('about')}}"><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="¿Que es esto?"> </i> </a>
+                </li>
+
+                <li id="logout2" class="nav-item">
+                    <a class="nav-link smaller" href="{{path('logout')}}">salir</a>
+                </li>   
+
+
+            {%endif%}
+        </ul>
+
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarsMenu" >
 
         <ul class="navbar-nav ">
 
             {%if  (userSession) %}
-                <li id="user2" class="nav-item ">
-                    <a class="nav-link" href="{{path('myProfile')}}"><b>{{userSession.getDisplayName()}}</b></a>
-                </li>
-            {%endif%}
-            <li class="nav-item ">
-                <a class="nav-link" href="{{path('newPromise')}}">Crear moneda </a>
-            </li>
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{{path('myHistory')}}">Mis monedas </a>
-            </li>
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{{path('myProfile')}}">Mi perfil </a>
-            </li>
-
-            <li class="nav-item" >
-                <a class="nav-link " href="{{path('profile')}}">Perfil publico</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('about')}}">¿Que es esto?</a>
-            </li>
-            {%if  (userSession) %}
-                <li id="logout2" class="nav-item">
-                    <a class="nav-link smaller" href="{{path('logout')}}">salir</a>
-                </li>
-            {%endif%}
-        </ul>
-
-    </div>
-
-    <div id="navbarsUser" class="navbar-toggleable  fixed-top" >
-        <ul class="navbar-nav" >
-            {%if  (userSession) %}
                 <li id="user1" class="nav-item ">
                     <a class="nav-link" href="{{path('myProfile')}}"><b>{{userSession.getDisplayName()}}</b></a>
                 </li>
+            {%endif%}
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('newPromise')}}"> <i class="fa fa-plus" aria-hidden="true"></i>  <span>Nueva moneda</span> </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('myHistory')}}"><i class="fa fa-money" aria-hidden="true"></i> <span>Mis monedas</span> </a>
+            </li>
+
+            {%if  (not userSession) %}
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('myProfile')}}"><i class="fa fa-user-circle" aria-hidden="true"></i> <span>Mi perfil</span> </a>
+                </li>
+            {%endif%}
+
+            <li class="nav-item" >
+                <a class="nav-link " href="{{path('profile')}}"><i class="fa fa-user-o" aria-hidden="true"></i> <span>Perfil publico</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('about')}}"><i class="fa fa-question-circle" aria-hidden="true"></i> <span>¿Que es esto?</span></a>
+            </li>
+
+            {%if  (userSession) %}
                 <li id="logout1" class="nav-item">
                     <a class="nav-link smaller" href="{{path('logout')}}">salir</a>
                 </li>
-
             {%endif%}
         </ul>
 
     </div>
 
 
-
-
-
 </nav>
+

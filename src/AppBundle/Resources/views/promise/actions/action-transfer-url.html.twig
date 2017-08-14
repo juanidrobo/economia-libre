@@ -1,0 +1,29 @@
+</br>
+<div class="card div-action div-transfer ">
+    <div class="card-header close">X</div>
+    <div class="card-header">
+
+        <label class="text-primary lead"><b>Transferir moneda con link o codigo QR</b> </label>
+
+    </div>
+    <div class="card-block">
+        <div >
+            <label  class="text-primary "> <b>Comparte esta información, a la persona deseada, para transferir la moneda.</b></label>
+            <label  class="text-primary "> <b>Link para transferir:</b></label>
+            <div>
+                {%set code=promise.code ~ "&" ~ promise.verification %}
+                {{url('promiseTransferLink',{'code':code})}}
+            </div>
+
+            </br>
+            <div>
+                <label  class="text-primary "> <b>Codigo QR para transferir:</b></label>  
+            </div>
+            <div><img  style="width: 120px" src="{{path('qrcodeTransfer',{'code':promise.code,'verification':promise.verification})}}"></img> 
+            </div>
+        </div>
+        <span class="alert-danger"></span>
+        <div><span class="alert alert-success"></span></div>  
+    </div>
+
+</div>

@@ -44,10 +44,15 @@
             <script src="{{ asset('bundles/appbundle/bootstrap/js/bootstrap.min.js')}}"></script>
             <script src="{{ asset('bundles/appbundle/bootstrap/js/jquery.redirect.js')}}"></script>
 
+            <script>
+                $(document).on('click', function () {
+                    $('.collapse').collapse('hide');
+                })
+            </script>
 
             {%if not userSession  %}
                 <script src="https://sdk.accountkit.com/es_LA/sdk.js" async="true"></script>
-                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <script src="https://apis.google.com/js/platform.js" ></script>
                 <script src="{{ asset('bundles/appbundle/js/login/login.js')}}"></script>
                 <script src="{{ asset('bundles/appbundle/js/login/fblogin.js')}}"></script>
                 <script src="{{ asset('bundles/appbundle/js/login/glogin.js')}}"></script>
@@ -80,6 +85,8 @@
 
 
             {%block afterCommonJs %}
+
+
             {%endblock%}
 
             {% block js %}

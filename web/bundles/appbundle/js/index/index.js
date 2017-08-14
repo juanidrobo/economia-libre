@@ -1,13 +1,14 @@
 $(".btn-new").click(function () {
- $.redirect(newPromiseUrl);
+    $.redirect(newPromiseUrl);
 });
 $(".btn-history").click(function () {
- $.redirect(historyUrl);
+    $.redirect(historyUrl);
 });
 $(".btn-myProfile").click(function () {
- $.redirect(myProfileUrl);
+    $.redirect(myProfileUrl);
 });
 $(".btn-publicProfile").click(function () {
- $.redirect(publicProfileUrl);
+    $.redirect(publicProfileUrl);
 });
+
 

@@ -28,12 +28,18 @@ activatePromise:
 qrcode:
     path: /qrcode/{code}
     defaults: { _controller: AppBundle:Promise:qrCode }   
+qrcodeTransfer:
+    path: /qrcode/{code}/{verification}
+    defaults: { _controller: AppBundle:Promise:qrCodeTransfer }   
 createSecKey:
     path: /createseckey
     defaults: { _controller: AppBundle:User:createSecKey }    
 promise:
     path: /promise/{code}
-    defaults: { _controller: AppBundle:Promise:promise }    
+    defaults: { _controller: AppBundle:Promise:promise }  
+promiseTransferLink:
+    path: /promise-transfer/{code}
+    defaults: { _controller: AppBundle:Promise:promise }  
 releasePromise:
     path: /release
     defaults: { _controller: AppBundle:Promise:release }

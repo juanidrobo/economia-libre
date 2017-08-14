@@ -1,6 +1,6 @@
 $(window).ready(function () {
     // $("body").animate({scrollTop: $(".login-email").offset().top}, 1500);
-    // $(".login-email").focus();
+     $(".login-email").focus();
 });
 $('.login-email').keypress(function (e) {
     var key = e.which;
